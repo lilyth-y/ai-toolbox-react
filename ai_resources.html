@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Toolbox - AI 리소스</title>
+
+  <!-- SEO 메타 태그 -->
+  <meta name="description" content="학생과 교육자를 위한 최고의 AI 도구 모음. 무료 및 할인 혜택을 받을 수 있는 AI 서비스들을 한눈에 확인하세요.">
+  <meta name="keywords" content="AI 도구, 교육용 AI, 학생 할인, 교사 도구, 무료 AI, 교육자 AI, AI 리소스">
+  <meta name="author" content="AI Toolbox">
+
+  <!-- Open Graph (소셜 미디어 공유) -->
+  <meta property="og:title" content="AI Toolbox - AI 리소스">
+  <meta property="og:description" content="학생과 교육자를 위한 최고의 AI 도구 모음">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Toolbox - AI 리소스">
+  <meta name="twitter:description" content="학생과 교육자를 위한 최고의 AI 도구 모음">
+
+  <!-- 구조화된 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AI Toolbox",
+    "description": "학생과 교육자를 위한 AI 도구 모음",
+    "url": "https://yoursite.com/ai_resources.html"
+  }
+  </script>
+  <style>
+    :root {
+      --primary-color: #6366f1;
+      /* Indigo */
+      --secondary-color: #a855f7;
+      /* Purple */
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-sub: #64748b;
+      --border-color: #e2e8f0;
+      --success-color: #22c55e;
+      --badge-bg: #eff6ff;
+      --badge-text: #3b82f6;
+      --edu-badge-bg: #dcfce7;
+      --edu-badge-text: #166534;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --border-color: #334155;
+      --badge-bg: #1e293b;
+      --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+    }
+
+    .guide-btn-container {
+      margin-top: 24px;
+    }
+
+    .guide-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 30px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .guide-link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Filter Navigation */
+    .filter-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .filter-btn {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-sub);
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1);
+      border-color: var(--primary-color);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .category-badge,
+    .edu-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .edu-badge {
+      background: var(--edu-badge-bg);
+      color: var(--edu-badge-text);
+      display: flex;
+      align-items: center;
+    }
+
+    .edu-badge::before {
+      content: '🎓 ';
+      margin-right: 4px;
+    }
+
+    /* Category Colors */
+    .cat-llm {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    .cat-research {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .cat-design {
+      background: #fae8ff;
+      color: #a21caf;
+    }
+
+    .cat-coding {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .cat-other {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .program-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0 0 4px 0;
+    }
+
+    .cost-info {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .original-price {
+      font-size: 0.9rem;
+      text-decoration: line-through;
+      color: #94a3b8;
+      font-weight: 400;
+      margin-left: 8px;
+    }
+
+    /* Data Table Style layout within card */
+    .data-table {
+      width: 100%;
+      margin-top: 8px;
+      border-collapse: collapse;
+    }
+
+    .data-row {
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .data-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      padding: 10px 0;
+      width: 90px;
+      vertical-align: top;
+    }
+
+    .data-val {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      padding: 10px 0 10px 12px;
+      vertical-align: top;
+    }
+
+    .optimized-text {
+      color: #4f46e5;
+      /* Indigo-600 */
+      font-weight: 600;
+    }
+
+    .action-area {
+      margin-top: auto;
+      padding-top: 20px;
+    }
+
+    .btn-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 12px;
+      background: var(--text-main);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-link:hover {
+      background: var(--primary-color);
+    }
+
+    .btn-link svg {
+      margin-left: 8px;
+      width: 18px;
+      height: 18px;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Empty State */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-sub);
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    /* Screen Reader Only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Focus Styles */
+    .filter-btn:focus,
+    .btn-link:focus,
+    .share-btn:focus,
+    #toolSearch:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-btn,
+      .btn-link {
+        min-height: 44px;
+        min-width: 44px;
+      }
+    }
+
+    /* 모바일 퍼스트 - 더 작은 화면 */
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tag:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: var(--bg-color);
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.3s ease-out;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .modal-content ul {
+      padding-left: 20px;
+    }
+
+    .modal-content li {
+      margin-bottom: 10px;
+    }
+
+    .modal-close {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    .stats-bar span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stats-bar strong {
+      color: var(--primary-color);
+    }
+
+    /* Share Button */
+    .share-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-sub);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .share-btn:hover {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <header>
+      <div style="display: flex; justify-content: flex-end; margin-bottom: -20px;">
+        <button id="themeToggle" class="filter-btn"
+          style="border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0;"
+          aria-label="다크 모드로 전환" type="button">
+          <svg id="sunIcon" style="display:none; width: 24px; height: 24px;" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707-.707M14.5 12a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+            </path>
+          </svg>
+          <svg id="moonIcon" style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+      </div>
+      <h1>AI Toolbox</h1>
+      <p class="subtitle">🎓 AI 도구 모음</p>
+
+      <div class="guide-btn-container">
+        <a href="onboarding.html" class="guide-link-btn">
+          <span>🚀</span>
+          나에게 딱 맞는 도구 & 프롬프트 배우기
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div style="max-width: 600px; margin: 0 auto 30px auto; position: relative;">
+      <label for="toolSearch" class="sr-only">AI 도구 검색</label>
+      <input type="text" id="toolSearch" aria-label="AI 도구 검색" aria-describedby="search-description"
+        placeholder="도구 이름이나 기능을 검색하세요..."
+        style="width: 100%; padding: 14px 20px 14px 45px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); font-size: 1rem; outline: none; transition: var(--transition); box-shadow: var(--card-shadow);">
+      <svg style="position: absolute; left: 15px; top: 15px; width: 20px; height: 20px; color: var(--text-sub);"
+        fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <span id="search-description" class="sr-only">도구 이름이나 기능으로 검색할 수 있습니다</span>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar" role="status" aria-live="polite" aria-atomic="true">
+      <span>📦 총 <strong id="totalCount">0</strong>개</span>
+      <span>🆓 무료 <strong id="freeCount">0</strong>개</span>
+      <span>🎓 교육자 <strong id="eduCount">0</strong>개</span>
+      <span id="visibleCountSpan" style="display: none;">표시: <strong id="visibleCount">0</strong>개</span>
+      <button class="filter-btn" id="guideBtn" style="padding: 6px 14px; font-size: 0.85rem;" aria-label="사용 가이드 열기">❓
+        가이드</button>
+    </div>
+
+    <!-- Filter Buttons -->
+    <nav class="filter-nav" id="filterNav" role="tablist" aria-label="카테고리 필터">
+      <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-pressed="true"
+        aria-label="전체보기 필터">전체보기</button>
+      <button class="filter-btn" data-filter="edu" role="tab" aria-selected="false" aria-pressed="false"
+        aria-label="교육자 가능 필터">👨‍🏫 교육자 가능</button>
+      <button class="filter-btn" data-filter="llm" role="tab" aria-selected="false" aria-pressed="false"
+        aria-label="LLM/Chatbot 필터">LLM/Chatbot</button>
+      <button class="filter-btn" data-filter="research" role="tab" aria-selected="false" aria-pressed="false"
+        aria-label="연구/학술 필터">연구/학술</button>
+      <button class="filter-btn" data-filter="design" role="tab" aria-selected="false" aria-pressed="false"
+        aria-label="디자인 필터">디자인</button>
+      <button class="filter-btn" data-filter="coding" role="tab" aria-selected="false" aria-pressed="false"
+        aria-label="코딩/개발 필터">코딩/개발</button>
+      <button class="filter-btn" data-filter="other" role="tab" aria-selected="false" aria-pressed="false"
+        aria-label="기타 필터">기타</button>
+    </nav>
+
+    <div class="grid" id="resourceGrid" role="list" aria-label="AI 도구 목록">
+      <!-- 카드는 JavaScript로 동적 생성됩니다 -->
+
+    </div>
+  </div>
+
+  <!-- JavaScript (인라인 통합) -->
+  <script>
+    // AI 도구 데이터
+    const toolsData = [
+      {
+        id: 'copilot',
+        name: 'Microsoft Copilot',
+        category: 'llm',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        cost: '무료 (M365 Edu)',
+        originalPrice: '$30/mo',
+        optimized: 'MS Office 문서 자동화 & 생태계 통합',
+        purpose: '워드/PPT 초안 작성, 엑셀 데이터 분석, 이메일 요약',
+        method: '학교 계정(@ac.kr, @edu)으로 로그인 시 자동 적용',
+        tags: ['무료', '오피스'],
+        url: 'https://www.microsoft.com/ko-kr/education/products/microsoft-365',
+        buttonText: '할인 확인하기'
+      },
+      {
+        id: 'gemini',
+        name: 'Google Gemini',
+        category: 'llm',
+        educator: false,
+        cost: '기본 무료',
+        originalPrice: 'Adv $20',
+        optimized: '구글 워크스페이스 연동 & 멀티모달 분석',
+        purpose: '유튜브 영상 요약, 이미지 분석, 드라이브 문서 검색',
+        method: '구글 계정 가입 (별도 교육자 할인 요금제 없음)',
+        tags: ['무료', '멀티모달'],
+        url: 'https://gemini.google.com/',
+        buttonText: '서비스 바로가기'
+      },
+      {
+        id: 'gemini-pro',
+        name: 'Google Gemini Pro',
+        category: 'llm',
+        educator: true,
+        educatorBadge: '학생 무료 1년',
+        cost: '무료 (학생 1년)',
+        originalPrice: '$200/년',
+        optimized: '최고급 AI 모델 & 2TB 저장공간 & 비디오 생성',
+        purpose: '고급 AI 연구, Deep Research, NotebookLM, Veo 3 비디오 생성',
+        method: '미국/일본/인도네시아/한국/브라질 대학생, gemini.google/students에서 신청',
+        tags: ['무료', '프리미엄', '학생'],
+        url: 'https://gemini.google/students/',
+        buttonText: '학생 무료 신청'
+      },
+      {
+        id: 'chatgpt-teachers',
+        name: 'ChatGPT for Teachers',
+        category: 'llm',
+        educator: true,
+        educatorBadge: '교사 무료',
+        cost: '무료 (K-12 교사)',
+        originalPrice: 'Plus $20',
+        optimized: '교육용 보안 & FERPA 준수 & 무제한 GPT-4.1',
+        purpose: '수업 자료 작성, 학생 피드백 생성, 안전한 AI 협업 공간',
+        method: '미국 K-12 교사 인증 (2027년 6월까지 무료)',
+        tags: ['무료', '교육', '보안'],
+        url: 'https://openai.com/index/chatgpt-for-teachers/',
+        buttonText: '교사 무료 신청'
+      },
+      {
+        id: 'consensus',
+        name: 'Consensus',
+        category: 'research',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        cost: '$7.19/mo',
+        originalPrice: '$11.99',
+        optimized: '근거 기반(Evidence-Based) 학술 답변',
+        purpose: '신뢰도 높은 논문 인용, 과학적 질문에 대한 답변 도출',
+        method: 'ac.kr/edu 메일 가입 (교수진도 할인/무료 트라이얼)',
+        tags: ['할인', '논문검색'],
+        url: 'https://consensus.app/pricing/',
+        buttonText: '할인 확인하기'
+      },
+      {
+        id: 'semantic-scholar',
+        name: 'Semantic Scholar',
+        category: 'research',
+        educator: true,
+        educatorBadge: '전체 무료',
+        cost: '완전 무료',
+        originalPrice: null,
+        optimized: '광범위한 과학 논문 탐색 및 인용 분석',
+        purpose: '최신 연구 트렌드 파악, 연관 논문 검색',
+        method: '연구자/학생 구분 없이 즉시 사용 가능',
+        tags: ['무료', '논문검색'],
+        url: 'https://www.semanticscholar.org/',
+        buttonText: '서비스 바로가기'
+      },
+      {
+        id: 'perplexity',
+        name: 'Perplexity AI',
+        category: 'research',
+        educator: false,
+        cost: '기본 무료',
+        originalPrice: 'Pro $20',
+        optimized: '실시간 정보 접근 & 정확한 출처 인용',
+        purpose: '최신 정보 검색, 논문 작성 보조, 팩트 체크',
+        method: '무료 계정 가입 (Pro는 유료)',
+        tags: ['무료', '검색', '인용'],
+        url: 'https://www.perplexity.ai/',
+        buttonText: '서비스 바로가기'
+      },
+      {
+        id: 'notebooklm',
+        name: 'NotebookLM',
+        category: 'research',
+        educator: false,
+        cost: '무료',
+        originalPrice: null,
+        optimized: '문서 업로드 & 요약 & 오디오 생성',
+        purpose: '논문 요약, 학습 가이드 생성, 오디오 개요',
+        method: '구글 계정으로 무료 사용',
+        tags: ['무료', '문서분석'],
+        url: 'https://notebooklm.google.com/',
+        buttonText: '서비스 바로가기'
+      },
+      {
+        id: 'adobe',
+        name: 'Adobe CC',
+        category: 'design',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        cost: '~60% OFF',
+        originalPrice: '$54.99',
+        optimized: '전문가급 크리에이티브 콘텐츠 제작',
+        purpose: '사진/영상 편집, 그래픽 디자인, PDF 편집',
+        method: '학교 이메일 또는 재직 증명서(교사)로 인증',
+        tags: ['할인', '디자인', '영상편집'],
+        url: 'https://www.adobe.com/kr/creativecloud/buy/students.html',
+        buttonText: '할인 확인하기'
+      },
+      {
+        id: 'figma',
+        name: 'Figma',
+        category: 'design',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        cost: '무료 (Edu plan)',
+        originalPrice: 'Pro',
+        optimized: '실시간 협업 디자인 및 수업용 화이트보드',
+        purpose: 'UI/UX 실습, FigJam을 활용한 아이디어 브레인스토밍',
+        method: 'Figma Education에서 교사(Educator)로 승인 신청',
+        tags: ['무료', '디자인', '협업'],
+        url: 'https://www.figma.com/education/',
+        buttonText: '교육용 무료 신청'
+      },
+      {
+        id: 'canva',
+        name: 'Canva',
+        category: 'design',
+        educator: true,
+        educatorBadge: '교사 무료',
+        cost: '무료 (교육용)',
+        originalPrice: 'Pro $15',
+        optimized: 'AI 디자인 도구 & 템플릿 & 프레젠테이션',
+        purpose: '수업 자료 제작, 포스터 디자인, AI 이미지 생성',
+        method: 'Canva for Education에서 교사 인증',
+        tags: ['무료', '디자인', 'AI생성'],
+        url: 'https://www.canva.com/education/',
+        buttonText: '교육용 신청'
+      },
+      {
+        id: 'github',
+        name: 'GitHub Education',
+        category: 'coding',
+        educator: true,
+        educatorBadge: '교사 툴박스',
+        cost: '무료',
+        originalPrice: 'Team/Ent',
+        optimized: '개발자 도구 번들 & 수업 관리(Classroom)',
+        purpose: '학생: Student Pack / 교수: Teacher Toolbox (수업관리 등)',
+        method: '교수진 ID/재직증명서로 Teacher 인증 신청',
+        tags: ['무료', '코딩', '번들'],
+        url: 'https://education.github.com/teachers',
+        buttonText: 'Teacher 신청하기'
+      },
+      {
+        id: 'jetbrains',
+        name: 'JetBrains',
+        category: 'coding',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        cost: '무료 (Edu License)',
+        originalPrice: '$289',
+        optimized: '전문 소프트웨어 개발 및 프로그래밍 교육',
+        purpose: 'Java(IntelliJ), Python(PyCharm) 등 실습 환경 구축',
+        method: 'Faculty 멤버로 신청 (학교 메일/ISIC-ITIC 카드)',
+        tags: ['무료', '코딩', 'IDE'],
+        url: 'https://www.jetbrains.com/community/education/#faculty',
+        buttonText: '라이선스 발급'
+      },
+      {
+        id: 'suno',
+        name: 'Suno AI',
+        category: 'other',
+        educator: false,
+        categoryLabel: '음악/오디오',
+        cost: '$5/mo (Student)',
+        originalPrice: '$10',
+        optimized: 'AI 기반 음악 생성(작사/작곡/보컬)',
+        purpose: '영상 BGM 제작, 창의적 음악 수업 보조',
+        method: '주로 학생 대상 할인(변동 가능), 교육자는 별도 문의 추천',
+        tags: ['할인', '음악', 'AI생성'],
+        url: 'https://suno.com/',
+        buttonText: '사이트 방문'
+      },
+      {
+        id: 'wolfram',
+        name: 'Wolfram Alpha',
+        category: 'other',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        categoryLabel: '수학/과학',
+        cost: '학술 할인 적용',
+        originalPrice: '$9.99',
+        optimized: '컴퓨테이셔널 인텔리전스 & 수식 계산',
+        purpose: '복잡한 미적분, 데이터 시각화, 과학적 팩트 체크',
+        method: '교육 기관 재직 증명으로 Academic Pricing 적용',
+        tags: ['할인', '수학', '과학'],
+        url: 'https://www.wolfram.com/wolfram-alpha-pro/pricing/academic/',
+        buttonText: '할인 확인하기'
+      },
+      {
+        id: 'prezi',
+        name: 'Prezi',
+        category: 'other',
+        educator: true,
+        educatorBadge: '교수/교사 가능',
+        categoryLabel: '발표/편집',
+        cost: '$3~$4/mo',
+        originalPrice: 'EDU',
+        optimized: '비선형적 스토리텔링 & 줌인/줌아웃 발표',
+        purpose: '몰입도 높은 강의 자료 제작, 온라인 강의 녹화',
+        method: '교육용 메일 인증으로 EDU Plus 플랜 가입',
+        tags: ['할인', '발표', '수업'],
+        url: 'https://prezi.com/education/',
+        buttonText: '교육용 플랜 보기'
+      },
+      {
+        id: 'brisk',
+        name: 'Brisk Teaching',
+        category: 'other',
+        educator: true,
+        educatorBadge: '교사 무료',
+        categoryLabel: '교육/수업',
+        cost: '무료',
+        originalPrice: null,
+        optimized: 'Google/Microsoft 통합 & 개인화된 학습 자료',
+        purpose: '수업 자료 생성, 피드백 작성, Google Docs/Classroom 통합',
+        method: '20,000개 이상 학군에서 사용, 교사 인증 후 무료',
+        tags: ['무료', '교육', '통합'],
+        url: 'https://www.briskteaching.com/',
+        buttonText: '무료 시작하기'
+      },
+      {
+        id: 'reclaim',
+        name: 'Reclaim.ai',
+        category: 'other',
+        educator: true,
+        educatorBadge: '교육 할인',
+        categoryLabel: '생산성',
+        cost: '50% 할인 (12개월)',
+        originalPrice: 'Pro $12',
+        optimized: 'AI 기반 일정 관리 & 자동 스케줄링',
+        purpose: '교사 일정 최적화, 자동 회의 스케줄링, 시간 블록 관리',
+        method: '교육 할인으로 12개월간 50% 할인',
+        tags: ['할인', '생산성', '스케줄링'],
+        url: 'https://reclaim.ai/pricing/education-discount',
+        buttonText: '할인 확인하기'
+      }
+    ];
+
+    // AI Toolbox 애플리케이션 로직
+    function createCard(tool) {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.setAttribute('data-category', tool.category);
+      card.setAttribute('data-educator', tool.educator);
+      card.setAttribute('data-id', tool.id);
+
+      const categoryLabel = tool.categoryLabel ||
+        (tool.category === 'llm' ? 'LLM' :
+          tool.category === 'research' ? '연구' :
+            tool.category === 'design' ? '디자인' :
+              tool.category === 'coding' ? '코딩' : '기타');
+
+      let badgeHTML = `<span class="category-badge cat-${tool.category}">${categoryLabel}</span>`;
+      if (tool.educator) {
+        const eduBadgeText = tool.educatorBadge || '교수/교사 가능';
+        badgeHTML += `<span class="edu-badge">${eduBadgeText}</span>`;
+      }
+
+      let priceHTML = tool.cost;
+      if (tool.originalPrice) {
+        priceHTML += ` <span class="original-price">${tool.originalPrice}</span>`;
+      }
+
+      const tagsHTML = tool.tags.map(tag =>
+        `<span class="tag" data-tag="${tag}" role="button" tabindex="0" aria-label="${tag} 태그 필터">#${tag}</span>`
+      ).join('');
+
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="badge-group">
+            ${badgeHTML}
+          </div>
+        </div>
+        <h3 class="program-name">${tool.name}</h3>
+        <div class="cost-info">${priceHTML}</div>
+        <table class="data-table">
+          <tr class="data-row">
+            <td class="data-label">최적화</td>
+            <td class="data-val optimized-text">${tool.optimized}</td>
+          </tr>
+          <tr class="data-row">
+            <td class="data-label">사용 목적</td>
+            <td class="data-val">${tool.purpose}</td>
+          </tr>
+          <tr class="data-row">
+            <td class="data-label">사용 방법</td>
+            <td class="data-val">${tool.method}</td>
+          </tr>
+        </table>
+        <div class="tags">
+          ${tagsHTML}
+        </div>
+        <div class="action-area" style="display: flex; gap: 10px;">
+          <a href="${tool.url}" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="btn-link" 
+             style="flex: 1;"
+             data-url="${tool.url}"
+             aria-label="${tool.buttonText} - ${tool.name}">
+            ${tool.buttonText}
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+          <button class="share-btn" 
+                  data-url="${tool.url}" 
+                  aria-label="링크 복사"
+                  type="button">
+            <svg style="width:20px;height:20px" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      `;
+
+      return card;
+    }
+
+    function updateStats() {
+      const cards = document.querySelectorAll('.card');
+      const totalCount = document.getElementById('totalCount');
+      const freeCount = document.getElementById('freeCount');
+      const eduCount = document.getElementById('eduCount');
+      const visibleCount = document.getElementById('visibleCount');
+
+      const visibleCards = Array.from(cards).filter(card =>
+        card.style.display !== 'none'
+      );
+
+      totalCount.textContent = cards.length;
+      freeCount.textContent = Array.from(cards).filter(card => {
+        const costInfo = card.querySelector('.cost-info').textContent;
+        return costInfo.includes('무료') || costInfo.includes('FREE');
+      }).length;
+      eduCount.textContent = document.querySelectorAll('.card[data-educator="true"]').length;
+
+      if (visibleCount) {
+        visibleCount.textContent = visibleCards.length;
+      }
+    }
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    function showEmptyState() {
+      const grid = document.getElementById('resourceGrid');
+      const emptyState = document.getElementById('emptyState');
+      const visibleCards = Array.from(grid.querySelectorAll('.card')).filter(card =>
+        card.style.display !== 'none'
+      );
+
+      if (visibleCards.length === 0) {
+        if (!emptyState) {
+          const emptyDiv = document.createElement('div');
+          emptyDiv.id = 'emptyState';
+          emptyDiv.className = 'empty-state';
+          emptyDiv.innerHTML = `
+            <p style="text-align: center; padding: 40px; color: var(--text-sub);">
+              검색 결과가 없습니다.
+            </p>
+            <button class="filter-btn" onclick="clearFilters()" style="display: block; margin: 0 auto;">
+              필터 초기화
+            </button>
+          `;
+          grid.appendChild(emptyDiv);
+        } else {
+          emptyState.style.display = 'block';
+        }
+      } else {
+        if (emptyState) {
+          emptyState.style.display = 'none';
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+      let cards = document.querySelectorAll('.card');
+      const searchInput = document.getElementById('toolSearch');
+      const themeToggle = document.getElementById('themeToggle');
+      const sunIcon = document.getElementById('sunIcon');
+      const moonIcon = document.getElementById('moonIcon');
+      const toast = document.getElementById('toast');
+      const guideBtn = document.getElementById('guideBtn');
+      const guideModal = document.getElementById('guideModal');
+      const closeModal = document.getElementById('closeModal');
+      const grid = document.getElementById('resourceGrid');
+
+      updateStats();
+
+      let activeFilter = 'all';
+      let activeTag = null;
+
+      // tools-data의 모든 도구를 카드로 생성
+      toolsData.forEach(tool => {
+        const card = createCard(tool);
+        grid.appendChild(card);
+      });
+
+      cards = document.querySelectorAll('.card');
+      updateStats();
+
+      function updateDisplay() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const allCards = document.querySelectorAll('.card');
+
+        allCards.forEach(card => {
+          const name = card.querySelector('.program-name').textContent.toLowerCase();
+          const optimized = card.querySelector('.optimized-text')?.textContent.toLowerCase() || '';
+          const purpose = card.querySelectorAll('.data-val')[1]?.textContent.toLowerCase() || '';
+          const category = card.getAttribute('data-category');
+          const isEdu = card.getAttribute('data-educator') === 'true';
+          const cardTags = Array.from(card.querySelectorAll('.tag')).map(t => t.getAttribute('data-tag'));
+
+          let matchesFilter = false;
+          if (activeFilter === 'all') matchesFilter = true;
+          else if (activeFilter === 'edu') matchesFilter = isEdu;
+          else matchesFilter = (category === activeFilter);
+
+          const matchesSearch = !searchTerm ||
+            name.includes(searchTerm) ||
+            optimized.includes(searchTerm) ||
+            purpose.includes(searchTerm);
+          const matchesTag = !activeTag || cardTags.includes(activeTag);
+
+          if (matchesFilter && matchesSearch && matchesTag) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        showEmptyState();
+        updateStats();
+        cards = document.querySelectorAll('.card');
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          activeFilter = btn.getAttribute('data-filter');
+          activeTag = null;
+          updateDisplay();
+        });
+      });
+
+      const debouncedUpdate = debounce(updateDisplay, 300);
+      searchInput.addEventListener('input', debouncedUpdate);
+
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          updateDisplay();
+          searchInput.focus();
+        }
+      });
+
+      grid.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tag')) {
+          const tagVal = e.target.getAttribute('data-tag');
+          if (activeTag === tagVal) {
+            activeTag = null;
+            e.target.classList.remove('active');
+          } else {
+            activeTag = tagVal;
+            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+            e.target.classList.add('active');
+          }
+          updateDisplay();
+        }
+      });
+
+      grid.addEventListener('keydown', (e) => {
+        if (e.target.classList.contains('tag') && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          e.target.click();
+        }
+      });
+
+      grid.addEventListener('click', (e) => {
+        if (e.target.closest('.share-btn')) {
+          const btn = e.target.closest('.share-btn');
+          const url = btn.getAttribute('data-url');
+
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+              toast.classList.add('show');
+              toast.setAttribute('role', 'status');
+              toast.setAttribute('aria-live', 'polite');
+              setTimeout(() => {
+                toast.classList.remove('show');
+              }, 2000);
+            }).catch(() => {
+              toast.textContent = '링크 복사에 실패했습니다.';
+              toast.classList.add('show');
+              setTimeout(() => {
+                toast.classList.remove('show');
+                toast.textContent = '링크가 복사되었습니다!';
+              }, 2000);
+            });
+          } else {
+            const textArea = document.createElement('textarea');
+            textArea.value = url;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+              document.execCommand('copy');
+              toast.classList.add('show');
+            } catch (err) {
+              toast.textContent = '링크 복사에 실패했습니다.';
+              toast.classList.add('show');
+            }
+            document.body.removeChild(textArea);
+            setTimeout(() => {
+              toast.classList.remove('show');
+              toast.textContent = '링크가 복사되었습니다!';
+            }, 2000);
+          }
+        }
+      });
+
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.body.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          document.body.removeAttribute('data-theme');
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+          themeToggle.setAttribute('aria-label', '다크 모드로 전환');
+        } else {
+          document.body.setAttribute('data-theme', 'dark');
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+          themeToggle.setAttribute('aria-label', '라이트 모드로 전환');
+        }
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      });
+
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+
+      guideBtn.addEventListener('click', () => {
+        guideModal.classList.add('show');
+        guideModal.setAttribute('aria-hidden', 'false');
+        closeModal.focus();
+      });
+
+      closeModal.addEventListener('click', () => {
+        guideModal.classList.remove('show');
+        guideModal.setAttribute('aria-hidden', 'true');
+        guideBtn.focus();
+      });
+
+      guideModal.addEventListener('click', (e) => {
+        if (e.target === guideModal) {
+          guideModal.classList.remove('show');
+          guideModal.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && guideModal.classList.contains('show')) {
+          guideModal.classList.remove('show');
+          guideModal.setAttribute('aria-hidden', 'true');
+          guideBtn.focus();
+        }
+      });
+
+      const focusableElements = guideModal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      guideModal.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      });
+
+      updateDisplay();
+    });
+
+    window.clearFilters = function () {
+      const searchInput = document.getElementById('toolSearch');
+      const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+
+      searchInput.value = '';
+      filterBtns.forEach(btn => {
+        if (btn.getAttribute('data-filter') === 'all') {
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-pressed', 'false');
+        }
+      });
+
+      searchInput.dispatchEvent(new Event('input'));
+      document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    };
+  </script>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">링크가 복사되었습니다!</div>
+
+  <!-- Guide Modal -->
+  <div class="modal-overlay" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+    aria-describedby="modal-description" aria-hidden="true">
+    <div class="modal-content">
+      <h2 id="modal-title">📖 AI Toolbox 사용 가이드</h2>
+      <div id="modal-description">
+        <h4>🎓 학생증 인증 팁</h4>
+        <ul>
+          <li>학생증 사진은 <strong>밝은 곳</strong>에서 반사 없이 찍으세요.</li>
+          <li>이름, 학교명, 유효기간이 <strong>선명하게</strong> 보여야 합니다.</li>
+          <li>스마트폰 스캔 앱으로 PDF 변환하면 승인률이 높아요.</li>
+        </ul>
+        <h4>📧 이메일 인증</h4>
+        <ul>
+          <li><strong>.edu</strong> 또는 <strong>.ac.kr</strong> 메일 사용 필수!</li>
+          <li>학교 이메일이 없다면 IT센터에 문의해 발급받으세요.</li>
+        </ul>
+        <h4>⚠️ 신청 시 주의</h4>
+        <ul>
+          <li>할인은 대부분 <strong>1년 단위</strong>이며, 졸업 전 갱신 가능합니다.</li>
+          <li>상업적 사용은 라이선스 위반이 될 수 있어요.</li>
+        </ul>
+      </div>
+      <button class="modal-close" id="closeModal" aria-label="모달 닫기">닫기</button>
+    </div>
+  </div>
+
+  <!-- 모든 JavaScript는 위의 인라인 스크립트에서 처리됩니다 -->
+
+</body>
+
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Toolbox - 시작하기 가이드</title>
+  <meta name="description" content="나에게 딱 맞는 AI 도구를 찾아보세요. 학생, 교육자, 역할별 추천 가이드.">
+  <link rel="stylesheet" href="css/onboarding.css">
+  <script src="js/onboarding.js" defer></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="nav-bar">
+      <a href="ai_resources.html" class="back-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        전체 리스트
+      </a>
+
+      <button class="theme-btn" id="settingsBtn" onclick="openSettings()" aria-label="API 설정"
+        style="margin-right: 12px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
+        </svg>
+      </button>
+      <button class="theme-btn" id="themeToggle" aria-label="테마 변경">
+        <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <header>
+      <h1>AI 시작하기</h1>
+      <p class="subtitle">어떤 작업을 하고 싶으신가요? 몇 가지 질문에 답하면 딱 맞는 도구를 추천해 드릴게요.</p>
+    </header>
+
+    <main class="wizard-container">
+      <!-- Step 1: Role -->
+      <div id="step1" class="step-content active">
+        <div class="question">나는 현재...</div>
+        <div class="options-grid">
+          <div class="option-card" onclick="selectRole('student')">
+            <div class="option-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+            </div>
+            <span class="option-label">학생입니다</span>
+          </div>
+          <div class="option-card" onclick="selectRole('educator')">
+            <div class="option-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </div>
+            <span class="option-label">교육자(교수/교사)입니다</span>
+          </div>
+          <div class="option-card" onclick="selectRole('general')">
+            <div class="option-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <span class="option-label">일반 사용자/연구자입니다</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Goal -->
+      <div id="step2" class="step-content">
+        <div class="question">어떤 도움이 가장 필요하신가요?</div>
+        <div class="options-grid" id="goalOptions">
+          <!-- Dynamically populated -->
+        </div>
+        <button onclick="resetWizard()" class="reset-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12" />
+          </svg>
+          처음으로
+        </button>
+      </div>
+
+      <!-- Step 3: Result -->
+      <div id="step3" class="step-content result-content">
+        <div class="question">추천 도구</div>
+        <div id="recommendationResult"></div>
+        <button onclick="resetWizard()" class="reset-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12" />
+          </svg>
+          다시 시작하기
+        </button>
+      </div>
+    </main>
+
+    <!-- Learning Hub Section -->
+    <div class="learning-hub" id="learning">
+      <div class="section-header">
+        <h2 class="section-title">🎓 AI 러닝 허브</h2>
+        <p class="subtitle">단순한 채팅을 넘어, AI를 전문가처럼 다루는 기술을 배워보세요.</p>
+      </div>
+
+      <!-- Module 1: Prompt Engineering Basics -->
+      <article class="module-card">
+        <header class="module-header">
+          <div class="module-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </div>
+          <h3 class="module-title">Chapter 1: 프롬프트 엔지니어링 기초</h3>
+        </header>
+        <div class="module-content">
+          <p style="margin-bottom: 24px;">AI에게 일을 잘 시키려면 <strong>'구체적인 작업 지시서'</strong>를 준다고 생각해야 합니다. <br>상황에 따라 두 가지
+            공식을 활용해보세요.</p>
+
+          <div class="concept-box rtf-box">
+            <h4>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                <line x1="9" y1="9" x2="9.01" y2="9" />
+                <line x1="15" y1="9" x2="15.01" y2="9" />
+              </svg>
+              입문자용 3단 공식 (RTF)
+            </h4>
+            <p class="rtf-header">가장 쉽고 빠르게 쓸 수 있는 기본 공식입니다.</p>
+            <ul style="margin: 0; padding-left: 20px;">
+              <li><strong>R (Role)</strong>: 역할 ("너는 영어 선생님이야")</li>
+              <li><strong>T (Task)</strong>: 할 일 ("이 문장을 교정해줘")</li>
+              <li><strong>F (Format)</strong>: 형식 ("표로 정리해서")</li>
+            </ul>
+          </div>
+
+          <div class="concept-box">
+            <h4>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              완벽한 프롬프트 공식 (RISP)
+            </h4>
+            <ul style="margin: 0; padding-left: 20px;">
+              <li><strong>R (Role)</strong>: 역할 부여 ("너는 10년 차 마케터야")</li>
+              <li><strong>I (Instruction)</strong>: 명확한 지시 ("이 데이터를 분석해서 보고서를 써줘")</li>
+              <li><strong>S (Specifics)</strong>: 구체적 배경 ("타겟 독자는 20대 대학생이고, 톤앤매너는 유머러스하게")</li>
+              <li><strong>P (Parameters)</strong>: 출력 형식 ("Markdown 표 형식으로, 3가지 핵심 요약 포함")</li>
+            </ul>
+            </ul>
+          </div>
+
+          <div style="margin-top: 32px; text-align: center; color: var(--text-sub); font-size: 0.9rem;">
+            👇 이 공식을 적용하면 어떻게 달라지는지 볼까요?
+          </div>
+
+          <div class="example-grid">
+            <div class="example-item bad-example">
+              <div class="example-tag">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+                BAD
+              </div>
+              "자기소개서 써줘."
+              <br><br>
+              <small style="opacity: 0.8;">👉 너무 모호해서 AI가 일반적이고 뻔한 내용만 출력함.</small>
+            </div>
+            <div class="example-item good-example">
+              <div class="example-tag">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                GOOD
+              </div>
+              "너는 <u>IT 기업 채용 담당자</u>야. 내가 보낸 이력서를 바탕으로, <u>'협업 능력'을 강조하는 500자 이내의 자기소개서 초안</u>을 작성해줘. 문체는 <u>신뢰감 있고
+                정중하게</u> 써줘."
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Module 2: Advanced Techniques -->
+      <article class="module-card">
+        <header class="module-header">
+          <div class="module-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="2" x2="12" y2="6" />
+              <line x1="12" y1="18" x2="12" y2="22" />
+              <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+              <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+              <line x1="2" y1="12" x2="6" y2="12" />
+              <line x1="18" y1="12" x2="22" y2="12" />
+              <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+              <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
+            </svg>
+          </div>
+          <h3 class="module-title">Chapter 2: 전문가를 위한 심화 기술</h3>
+        </header>
+        <div class="module-content">
+
+          <div class="concept-box costar-box">
+            <h4 class="costar-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              전문가용 6단계 공식 (CO-STAR)
+            </h4>
+            <p style="margin: 0 0 16px 0; font-size: 0.95rem;">싱가포르 프롬프트 엔지니어링 대회 우승자가 사용한 비즈니스/전문가용 프레임워크입니다.</p>
+            <div class="costar-grid">
+              <div><strong>C (Context)</strong>: 배경/상황</div>
+              <div><strong>O (Objective)</strong>: 작업 목표</div>
+              <div><strong>S (Style)</strong>: 글 스타일</div>
+              <div><strong>T (Tone)</strong>: 어조/무드</div>
+              <div><strong>A (Audience)</strong>: 타겟 독자</div>
+              <div><strong>R (Response)</strong>: 응답 형식</div>
+            </div>
+          </div>
+
+          <div class="technique-list">
+            <!-- Technique A -->
+            <div class="technique-card">
+              <div class="technique-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <line x1="9" y1="3" x2="9" y2="21" />
+                </svg>
+                <span>예시 주기 (Few-Shot Prompting)</span>
+              </div>
+              <p>원하는 결과물의 예시를 1~2개 보여주면 AI가 패턴을 파악해 훨씬 정확하게 답변합니다.</p>
+              <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; font-size: 0.9rem;">
+                <strong>User:</strong><br>
+                "이 영화 한 줄 평 남겨줘. 예시는 다음과 같아."<br>
+                영화: 기생충 -> 평: 계급 사회의 서늘한 농담.<br>
+                영화: 어벤져스 -> 평: 영웅들의 장대한 피날레.<br>
+                영화: <u>오펜하이머</u> -> (여기에 답변해)
+              </div>
+            </div>
+
+            <!-- Technique B -->
+            <div class="technique-card">
+              <div class="technique-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="6" y1="3" x2="6" y2="15" />
+                  <circle cx="18" cy="6" r="3" />
+                  <circle cx="6" cy="18" r="3" />
+                  <path d="M18 9a9 9 0 0 1-9 9" />
+                </svg>
+                <span>생각의 사슬 (Chain of Thought)</span>
+              </div>
+              <p>복잡한 문제는 <strong>"단계별로 생각해서 풀어줘"</strong>라고 요청하세요. 논리적 오류가 줄어듭니다.</p>
+              <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; font-size: 0.9rem;">
+                <strong>User:</strong><br>
+                "철수가 사과를 5개 샀어. 2개를 먹고, 영희한테 1개를 줬어. 남은 사과는 몇 개야? <u>단계별로 계산 과정을 보여줘.</u>"
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Module 3: Role-Based Tips -->
+      <article class="module-card">
+        <header class="module-header">
+          <div class="module-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+              <line x1="12" y1="22.08" x2="12" y2="12" />
+            </svg>
+          </div>
+          <h3 class="module-title">Chapter 3: 분야별 활용 꿀팁</h3>
+        </header>
+        <div class="module-content">
+          <div class="technique-list">
+            <div class="technique-card" style="border-left: 4px solid #a855f7;">
+              <div class="technique-title" style="color: #a855f7;">
+                🎓 학생/연구자
+              </div>
+              <ul style="padding-left: 20px; font-size: 0.95rem;">
+                <li><strong>논문 요약:</strong> "이 PDF의 핵심 주장 3가지를 학부생도 이해하기 쉽게 설명해줘."</li>
+                <li><strong>퀴즈 생성:</strong> "이 강의 노트를 바탕으로 시험에 나올법한 객관식 문제 5개를 만들어줘."</li>
+                <li><strong>교정:</strong> "이 에세이의 논리적 흐름이 어색한 부분을 찾아서 지적해줘."</li>
+              </ul>
+            </div>
+
+            <div class="technique-card" style="border-left: 4px solid #22c55e;">
+              <div class="technique-title" style="color: #166534;">
+                💻 개발자 (Coding)
+              </div>
+              <ul style="padding-left: 20px; font-size: 0.95rem;">
+                <li><strong>코드 설명:</strong> "이 함수가 어떤 역할을 하는지 주석을 달아서 설명해줘."</li>
+                <li><strong>디버깅:</strong> "에러 메시지가 이렇게 떴어. [코드]에서 원인이 뭘까? 해결책만 알려줘."</li>
+                <li><strong>리팩토링:</strong> "이 코드를 더 읽기 쉽고 효율적으로 변환해줘 (변수명 중요)."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Prompt Lab Section -->
+    <section class="prompt-lab" id="lab">
+      <div class="lab-header">
+        <div class="lab-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18" />
+            <path d="M6 6l12 12" />
+          </svg>
+          🧪 프롬프트 실험실
+          <span class="lab-badge">BETA</span>
+        </div>
+        <div style="font-size: 0.8rem; color: #9ca3af;">AI Simulator</div>
+      </div>
+      <div class="lab-grid">
+        <div class="editor-pane">
+          <label
+            style="display: block; margin-bottom: 12px; font-weight: 600; color: #9ca3af; font-size: 0.85rem;">INPUT
+            PROMPT</label>
+          <textarea id="labInput" class="code-area"
+            placeholder="// 여기에 프롬프트를 입력하고 '실행'을 눌러보세요.&#13;&#10;예: '마케팅 이메일 써줘'"></textarea>
+          <div class="lab-controls">
+            <button class="btn-run" onclick="runSimulation()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              실행 (Run)
+            </button>
+            <button class="btn-fix" onclick="autoOptimize()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              자동 최적화
+            </button>
+          </div>
+          <div class="analysis-panel" id="analysisPanel" style="display: none;">
+            <div id="aiModelBadge"
+              style="float: right; font-size: 0.75rem; background: #374151; padding: 2px 8px; border-radius: 4px; color: #9ca3af;">
+              Simulated AI</div>
+            <div style="clear: both;"></div>
+            <div
+              style="margin-bottom: 16px; font-weight: 700; color: #e5e7eb; border-bottom: 1px solid #404040; padding-bottom: 8px;">
+              📊 품질 점수 (Quality Score)</div>
+            <div class="score-item">
+              <span style="font-size: 0.85rem; color: #a3a3a3;">구체성 (Specifics)</span>
+              <div class="score-bar">
+                <div class="score-fill" id="scoreS" style="width: 20%"></div>
+              </div>
+            </div>
+            <div class="score-item">
+              <span style="font-size: 0.85rem; color: #a3a3a3;">역할 부여 (Role)</span>
+              <div class="score-bar">
+                <div class="score-fill" id="scoreR" style="width: 0%"></div>
+              </div>
+            </div>
+            <div class="score-item">
+              <span style="font-size: 0.85rem; color: #a3a3a3;">배경 정보 (Context)</span>
+              <div class="score-bar">
+                <div class="score-fill" id="scoreC" style="width: 10%"></div>
+              </div>
+            </div>
+            <div id="feedbackText" style="margin-top: 14px; color: #f87171; font-size: 0.85rem; line-height: 1.4;">
+            </div>
+          </div>
+        </div>
+        <div class="preview-pane">
+          <label
+            style="display: block; margin-bottom: 12px; font-weight: 600; color: #9ca3af; font-size: 0.85rem;">OUTPUT
+            SIMULATION</label>
+          <div class="chat-simulation" id="chatSim">
+            <div class="sim-msg">
+              <div class="sim-avatar ai">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+                  <path d="M12 18a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z" />
+                  <path d="M12 8a6 6 0 0 1 6 6v4H6v-4a6 6 0 0 1 6-6z" />
+                </svg>
+              </div>
+              <div class="sim-content">
+                안녕하세요! 프롬프트를 입력하면 제가 어떻게 반응하는지 미리 테스트해볼 수 있습니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Settings Modal (BYOK) -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ AI 설정 (BYOK)</h3>
+        <button class="modal-close" onclick="closeSettings()">&times;</button>
+      </div>
+      <div style="margin-bottom: 24px; color: var(--text-sub); font-size: 0.95rem;">
+        Google의 <strong>Gemini API Key</strong>를 입력하면, 시뮬레이터가 아닌 <strong>실제 AI</strong>가 동작합니다.<br>
+        키는 브라우저(로컬)에만 저장되며 외부로 전송되지 않습니다.
+        <br><br>
+        <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary-color);">🔑 API Key
+          발급받기 (무료)</a>
+      </div>
+      <div class="api-input-group">
+        <label style="display:block; margin-bottom: 8px; font-weight: 600;">Gemini API Key</label>
+        <input type="password" id="apiKeyInput" class="api-input" placeholder="AIzaSy...">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeSettings()">닫기</button>
+        <button class="btn-primary" onclick="saveSettings()">저장하기</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+{
+  "common": {
+    "appName": "AI工具箱 & 学习中心",
+    "tagline": "发现AI工具，掌握提示词，学习与创造",
+    "home": "首页",
+    "close": "关闭",
+    "closeModal": "关闭窗口",
+    "save": "保存",
+    "minimize": "最小化",
+    "open": "打开"
+  },
+  "nav": {
+    "home": "首页",
+    "explore": "探索工具",
+    "promptLab": "提示词实验室",
+    "learning": "学习中心",
+    "settings": "设置",
+    "back": "返回"
+  },
+  "home": {
+    "hero": "通往AI大师之路",
+    "subtitle": "探索100+AI工具，创建强大的提示词，释放你的创造力",
+    "cta": "开始使用"
+  },
+  "tools": {
+    "title": "AI工具探索器",
+    "description": "探索和筛选各种AI工具，找到最适合你的",
+    "subtitle": "找到最适合你需求的AI工具",
+    "search": "搜索工具...",
+    "searchPlaceholder": "按工具名称、功能、关键词搜索...",
+    "searchLabel": "搜索AI工具",
+    "searchHint": "你可以按名称、功能或关键词搜索AI工具",
+    "filter": "按类别筛选",
+    "price": "价格",
+    "features": "功能",
+    "visit": "访问工具",
+    "affiliate": "推广链接",
+    "noResults": "未找到工具，请尝试其他搜索",
+    "loading": "加载工具中...",
+    "compare": "比较",
+    "addTool": "添加工具",
+    "removeTool": "移除工具",
+    "compareHint": "选择最多3个工具进行比较",
+    "toggleBookmark": "添加/移除收藏",
+    "addedToBookmarks": "已添加到收藏！❤️",
+    "removedFromBookmarks": "已从收藏中移除",
+    "resetFilter": "重置筛选",
+    "free": "免费",
+    "paid": "付费",
+    "eduFree": "学生/教师免费",
+    "tags": "标签",
+    "upvote": "点赞",
+    "upvotes": "{{count}}个点赞",
+    "saves": "{{count}}个收藏",
+    "verified": "已认证",
+    "trending": "热门"
+  },
+  "filter": {
+    "all": "全部",
+    "favorites": "❤️ 收藏",
+    "freemium": "免费/免费增值",
+    "paid": "付费",
+    "edu": "学生/教师免费"
+  },
+  "promptLab": {
+    "title": "提示词实验室",
+    "subtitle": "用AI测试你的提示词",
+    "placeholder": "在此输入提示词...",
+    "send": "发送",
+    "clear": "清除",
+    "apiKey": "API密钥",
+    "enterKey": "输入你的Gemini API密钥",
+    "response": "响应",
+    "thinking": "AI正在思考..."
+  },
+  "learning": {
+    "title": "学习中心",
+    "subtitle": "掌握AI和提示词工程",
+    "getStarted": "开始使用AI",
+    "promptTips": "提示词工程技巧",
+    "aiBasics": "AI基础",
+    "viewCourse": "查看课程"
+  },
+  "settings": {
+    "title": "设置 (BYOK)",
+    "description": "输入你的Google Gemini API密钥以使用真实AI而非模拟器",
+    "privacy": "密钥仅存储在浏览器本地，不会发送到外部服务器",
+    "getKey": "免费获取API密钥",
+    "apiKey": "Gemini API密钥",
+    "theme": "主题",
+    "language": "语言",
+    "notifications": "通知",
+    "about": "关于",
+    "save": "保存设置",
+    "close": "关闭"
+  },
+  "footer": {
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们",
+    "copyright": "版权所有"
+  },
+  "cookie": {
+    "title": "Cookie和隐私同意",
+    "description": "本网站使用Cookie进行广告和分析。点击'接受'获取个性化广告，或选择'拒绝'仅显示一般广告。",
+    "viewPolicy": "查看隐私政策",
+    "accept": "接受",
+    "reject": "拒绝",
+    "open": "打开Cookie设置"
+  },
+  "share": {
+    "copy": "复制链接",
+    "copied": "链接已复制！📋",
+    "error": "复制失败"
+  },
+  "messages": {
+    "success": "成功！",
+    "error": "发生错误",
+    "loading": "加载中...",
+    "copied": "已复制到剪贴板！"
+  }
+}

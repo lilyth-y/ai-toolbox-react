@@ -1,0 +1,122 @@
+{
+  "common": {
+    "appName": "AIツールボックス & ラーニングハブ",
+    "tagline": "AIツールを発見し、プロンプトをマスターし、学び創造する",
+    "home": "ホーム",
+    "close": "閉じる",
+    "closeModal": "モーダルを閉じる",
+    "save": "保存",
+    "minimize": "最小化",
+    "open": "開く"
+  },
+  "nav": {
+    "home": "ホーム",
+    "explore": "ツールを探す",
+    "promptLab": "プロンプトラボ",
+    "learning": "ラーニングハブ",
+    "settings": "設定",
+    "back": "戻る"
+  },
+  "home": {
+    "hero": "AIマスターへの道",
+    "subtitle": "100以上のAIツールを探索し、強力なプロンプトを作成し、創造力を解き放とう",
+    "cta": "始める"
+  },
+  "tools": {
+    "title": "AIツールエクスプローラー",
+    "description": "様々なAIツールを探索してフィルターし、自分に最適なものを見つけましょう",
+    "subtitle": "あなたに最適なAIツールを見つけましょう",
+    "search": "ツールを検索...",
+    "searchPlaceholder": "ツール名、機能、キーワードで検索...",
+    "searchLabel": "AIツールを検索",
+    "searchHint": "ツール名、機能、キーワードでAIツールを検索できます",
+    "filter": "カテゴリでフィルター",
+    "price": "価格",
+    "features": "機能",
+    "visit": "ツールへ",
+    "affiliate": "アフィリエイトリンク",
+    "noResults": "ツールが見つかりません。別の検索をお試しください。",
+    "loading": "ツールを読み込み中...",
+    "compare": "比較",
+    "addTool": "ツールを追加",
+    "removeTool": "ツールを削除",
+    "compareHint": "最大3つのツールを選択して比較",
+    "toggleBookmark": "お気に入りに追加/削除",
+    "addedToBookmarks": "お気に入りに追加しました！❤️",
+    "removedFromBookmarks": "お気に入りから削除しました",
+    "resetFilter": "フィルターをリセット",
+    "free": "無料",
+    "paid": "有料",
+    "eduFree": "学生/教師無料",
+    "tags": "タグ",
+    "upvote": "いいね",
+    "upvotes": "{{count}}件のいいね",
+    "saves": "{{count}}件の保存",
+    "verified": "認証済み",
+    "trending": "トレンド"
+  },
+  "filter": {
+    "all": "すべて",
+    "favorites": "❤️ お気に入り",
+    "freemium": "無料/フリーミアム",
+    "paid": "有料",
+    "edu": "学生/教師無料"
+  },
+  "promptLab": {
+    "title": "プロンプトラボ",
+    "subtitle": "AIでプロンプトをテスト",
+    "placeholder": "プロンプトを入力してください...",
+    "send": "送信",
+    "clear": "クリア",
+    "apiKey": "APIキー",
+    "enterKey": "Gemini APIキーを入力",
+    "response": "応答",
+    "thinking": "AIが考えています..."
+  },
+  "learning": {
+    "title": "ラーニングハブ",
+    "subtitle": "AIとプロンプトエンジニアリングをマスターする",
+    "getStarted": "AIを始める",
+    "promptTips": "プロンプトエンジニアリングのヒント",
+    "aiBasics": "AI基礎",
+    "viewCourse": "コースを見る"
+  },
+  "settings": {
+    "title": "設定 (BYOK)",
+    "description": "Google Gemini APIキーを入力すると、シミュレーターの代わりに実際のAIを使用できます",
+    "privacy": "キーはブラウザにのみ保存され、外部に送信されません",
+    "getKey": "無料でAPIキーを取得",
+    "apiKey": "Gemini APIキー",
+    "theme": "テーマ",
+    "language": "言語",
+    "notifications": "通知",
+    "about": "情報",
+    "save": "設定を保存",
+    "close": "閉じる"
+  },
+  "footer": {
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "contact": "お問い合わせ",
+    "copyright": "All rights reserved"
+  },
+  "cookie": {
+    "title": "Cookieとプライバシーの同意",
+    "description": "このサイトは広告と分析にCookieを使用しています。「同意」をクリックするとパーソナライズ広告が表示され、「拒否」を選択すると一般広告のみ表示されます。",
+    "viewPolicy": "プライバシーポリシーを見る",
+    "accept": "同意",
+    "reject": "拒否",
+    "open": "Cookie設定を開く"
+  },
+  "share": {
+    "copy": "リンクをコピー",
+    "copied": "リンクをコピーしました！📋",
+    "error": "コピーに失敗しました"
+  },
+  "messages": {
+    "success": "成功しました！",
+    "error": "エラーが発生しました",
+    "loading": "読み込み中...",
+    "copied": "クリップボードにコピーしました！"
+  }
+}

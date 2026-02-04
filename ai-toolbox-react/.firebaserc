@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "ai-toolbox-production",
+    "portfolio": "ai-toolbox-portfolio"
+  }
+}

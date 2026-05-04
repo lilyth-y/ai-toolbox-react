@@ -3,6 +3,16 @@ name: Deploy static site to GitHub Pages
 on:
   push:
     branches: ["master"]
+    paths:
+      - "*.html"
+      - "css/**"
+      - "js/**"
+      - "docs/**"
+      - "index.html"
+      - "robots.txt"
+      - "sitemap.xml"
+      - ".nojekyll"
+      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
 permissions:

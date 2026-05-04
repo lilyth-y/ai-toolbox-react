@@ -48,10 +48,16 @@
 
 ## 5) GitHub Actions 배포 방식 (권장)
 
-- `.github/workflows/pages.yml` 워크플로우로 정적 파일을 배포합니다.
+- `.github/workflows/deploy-pages.yml` 워크플로우로 정적 파일을 배포합니다.
 - 이 저장소는 루트에 정적 페이지가 있어 별도 빌드 없이도 배포 가능합니다.
 - 배포 후 URL 예시:
   - `https://<github-username>.github.io/<repository-name>/`
+
+### 브랜치 기반 배포 분리 정책 (혼선 방지)
+- **master 브랜치**: GitHub Pages 배포 전용
+- **develop 브랜치**: Firebase Hosting 배포 전용
+- CI(린트/테스트/빌드)는 master/develop 모두에서 실행
+- 따라서 같은 커밋이 Pages와 Firebase에 동시에 배포되지 않도록 분리됩니다.
 
 ---
 

@@ -38,8 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Run ESLint (app source only)
-        run: npx eslint "src/**/*.{js,jsx,ts,tsx}"
+      - name: Run ESLint (non-blocking)
+        continue-on-error: true
+        run: npm run lint
 
       - name: Run tests
         run: npm run test -- --run

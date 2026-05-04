@@ -35,5 +35,9 @@
 2. Open `ai_resources.html` or `onboarding.html` in your browser.
 3. To use Real AI features, click the **Settings (⚙️)** button and enter your Gemini API Key.
 
+## 📚 Project Guide (Korean)
+- Step-by-step AI 활용 프로젝트 가이드 (문서화 -> 프로젝트 관리 -> 모델 개발/연동 -> 모바일 활용):
+  - `docs/ko/ai-project-step-by-step.md`
+
 ## 📄 License
 This project is open source and available for educational purposes.

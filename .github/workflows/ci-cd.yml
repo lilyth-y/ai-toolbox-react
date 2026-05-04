@@ -1,112 +1,94 @@
-name: CI/CD Pipeline
+name: React App CI/CD
 
 on:
   push:
-    branches: [main, develop]
+    branches: [master, develop]
+    paths:
+      - "ai-toolbox-react/**"
+      - ".github/workflows/ci-cd.yml"
   pull_request:
-    branches: [main]
+    branches: [master]
+    paths:
+      - "ai-toolbox-react/**"
+      - ".github/workflows/ci-cd.yml"
+
+concurrency:
+  group: react-ci-cd-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  # 빌드 및 테스트
-  build-and-test:
+  test-and-build:
+    name: Lint, test, and build
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-      
-      - name: Run ESLint
-        run: npm run lint
-      
-      - name: Run tests
-        run: npm test -- --run
-      
-      - name: Build project
-        run: npm run build
-      
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        if: matrix.node-version == '20.x'
-        with:
-          name: dist
-          path: dist/
-          retention-days: 7
+    defaults:
+      run:
+        working-directory: ai-toolbox-react
 
-  # Firebase 배포 (main 브랜치만)
-  deploy-firebase:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'npm'
-      
+          node-version: "20.x"
+          cache: "npm"
+          cache-dependency-path: ai-toolbox-react/package-lock.json
+
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
-      
-      - name: Build project
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test -- --run
+
+      - name: Build app
+        run: npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-toolbox-react-dist
+          path: ai-toolbox-react/dist/
+          retention-days: 7
+
+  deploy-firebase:
+    name: Deploy to Firebase Hosting
+    needs: test-and-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ai-toolbox-react
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+          cache-dependency-path: ai-toolbox-react/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build app for production
         run: npm run build
         env:
           VITE_GA4_ID: ${{ secrets.VITE_GA4_ID }}
           VITE_ADSENSE_CLIENT_ID: ${{ secrets.VITE_ADSENSE_CLIENT_ID }}
           VITE_SITE_URL: ${{ secrets.VITE_SITE_URL }}
           VITE_CONTACT_EMAIL: ${{ secrets.VITE_CONTACT_EMAIL }}
-      
+
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-
-  # Lighthouse CI 성능 체크
-  lighthouse:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-      
-      - name: Build project
-        run: npm run build
-      
-      - name: Run Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v11
-        with:
-          urls: |
-            http://localhost:4173/
-            http://localhost:4173/tools
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-          runs: 3

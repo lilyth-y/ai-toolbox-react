@@ -1,181 +1,241 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Toolbox - 웹교재</title>
-  <meta name="description" content="AI 도입 영역을 단계별로 학습하는 웹교재. 문서화, 프로젝트관리, 연동, 운영, 모바일 활용까지 한 번에 학습합니다.">
+  <title>AI Toolbox - Intro to End 웹교재</title>
+  <meta name="description" content="AI 도입을 Intro부터 End까지 한 흐름으로 학습하는 코스형 웹교재입니다.">
   <link rel="stylesheet" href="css/ai_textbook.css">
   <script src="js/ai_textbook.js" defer></script>
 </head>
-
 <body>
   <div class="container">
     <header class="hero">
       <div class="hero-top">
-        <a href="ai_resources.html" class="back-link">← AI 리소스 목록으로</a>
+        <a href="ai_resources.html" class="back-link">← AI 리소스로 돌아가기</a>
         <button id="themeToggle" class="theme-btn" aria-label="테마 전환">🌓</button>
       </div>
-      <h1>AI 도입 실전 웹교재</h1>
-      <p>노베이스도 따라올 수 있도록, AI를 어디에 어떻게 도입할지 영역별로 학습하는 실행형 교재입니다.</p>
+      <p class="hero-kicker">AI Toolbox Web Textbook</p>
+      <h1>AI 도입 코스: Intro → End</h1>
+      <p>기획, 실행, 운영, 회고까지 한 사이클로 완주하는 웹교재입니다. 체크를 누르면서 실제 도입 흐름을 끝까지 따라가세요.</p>
       <div class="hero-actions">
-        <a href="#curriculum" class="primary-btn">학습 시작</a>
-        <a href="#matrix" class="secondary-btn">실행 매트릭스 보기</a>
+        <a href="#intro" class="primary-btn">코스 시작</a>
+        <a href="#end" class="secondary-btn">마무리 섹션</a>
       </div>
     </header>
 
-    <nav class="quick-nav" aria-label="빠른 이동">
-      <a href="#curriculum">커리큘럼</a>
-      <a href="#areas">도입 영역 분해</a>
-      <a href="#matrix">1페이지 매트릭스</a>
-      <a href="#weekly">주간 실행</a>
-      <a href="#mobile">모바일 트랙</a>
+    <section class="progress-card card" aria-live="polite">
+      <div class="progress-header">
+        <h2>전체 진행률</h2>
+        <strong id="progressText">0%</strong>
+      </div>
+      <div class="progress-track">
+        <div id="progressBar" class="progress-fill" style="width: 0%;"></div>
+      </div>
+      <p id="nextStepHint" class="hint">다음 권장 단계: Intro 체크부터 시작하세요.</p>
+    </section>
+
+    <nav class="quick-nav" aria-label="챕터 이동">
+      <a href="#intro">Intro</a>
+      <a href="#chapter1">Chapter 1</a>
+      <a href="#chapter2">Chapter 2</a>
+      <a href="#chapter3">Chapter 3</a>
+      <a href="#chapter4">Chapter 4</a>
+      <a href="#chapter5">Chapter 5</a>
+      <a href="#chapter6">Chapter 6</a>
+      <a href="#end">End</a>
     </nav>
 
     <main>
-      <section id="curriculum" class="card">
-        <h2>1) 단계별 커리큘럼</h2>
+      <section id="intro" class="card chapter" data-chapter="intro">
+        <div class="chapter-head">
+          <h2>Intro) 왜 이 코스를 하나?</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-intro"> 완료</label>
+        </div>
+        <p>목표는 "AI 기능 구경"이 아니라 "우리 환경에 맞게 AI를 도입하고 운영하는 실행력"을 만드는 것입니다.</p>
+        <ul>
+          <li>노베이스도 시작 가능</li>
+          <li>작은 성공 -> 확장 전략</li>
+          <li>사람 검토를 유지하는 운영 방식</li>
+        </ul>
+      </section>
+
+      <section id="chapter1" class="card chapter" data-chapter="chapter1">
+        <div class="chapter-head">
+          <h2>Chapter 1) 기본 용어와 운영 원칙</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-1"> 완료</label>
+        </div>
         <div class="grid two">
           <article class="module">
-            <h3>Step 1: 문서 자동화</h3>
+            <h3>핵심 용어</h3>
             <ul>
-              <li>회의록/보고서/발표본 템플릿 만들기</li>
-              <li>요약/교정/톤 변환 프롬프트 만들기</li>
-              <li>사실성/누락/표현 체크리스트 운영</li>
+              <li>프롬프트, LLM, API, 워크플로우</li>
+              <li>평가 단계(실행 -> 소규모 -> 전체)</li>
+              <li>사람 검토(Human-in-the-loop)</li>
             </ul>
           </article>
           <article class="module">
-            <h3>Step 2: 프로젝트 관리 자동화</h3>
+            <h3>운영 원칙</h3>
             <ul>
-              <li>회의 메모 -> 액션아이템 자동 추출</li>
-              <li>담당자/기한/우선순위 구조화</li>
-              <li>주간 진행 리포트 자동화</li>
-            </ul>
-          </article>
-          <article class="module">
-            <h3>Step 2.5: 브릿지</h3>
-            <ul>
-              <li>노코드/로우코드로 AI 호출 흐름 체험</li>
-              <li>입력 -> JSON 출력 구조 확인</li>
-              <li>실패 케이스와 재시도 전략 기록</li>
-            </ul>
-          </article>
-          <article class="module">
-            <h3>Step 3: API 연동</h3>
-            <ul>
-              <li>프롬프트 라우팅과 응답 스키마 정의</li>
-              <li>에러 처리와 요청 로그 설계</li>
-              <li>프론트 입력/결과/히스토리 화면 구성</li>
+              <li>변수는 한 번에 하나만 변경</li>
+              <li>실패 사례를 기록하고 반복 개선</li>
+              <li>최종 배포 전 검토 절차 고정</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section id="areas" class="card">
-        <h2>2) AI 도입 가능 영역 세부 분해</h2>
-        <p class="hint">점수보다 "도입 위치"에 집중합니다. 각 영역에서 AI 역할과 사람의 최종 검토 지점을 분리해 설계합니다.</p>
+      <section id="chapter2" class="card chapter" data-chapter="chapter2">
+        <div class="chapter-head">
+          <h2>Chapter 2) AI 도입 가능 영역 분해</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-2"> 완료</label>
+        </div>
+        <p class="hint">각 영역에서 AI 역할과 사람 역할을 분리하면 도입 실패가 줄어듭니다.</p>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>영역</th>
-                <th>AI가 맡는 역할</th>
-                <th>사람이 최종 확인할 것</th>
+                <th>AI 역할</th>
+                <th>사람 역할</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>수업/업무 설계</td>
-                <td>목표 문장 초안, 차시 구조 자동 제안</td>
-                <td>학습자 수준 적합성, 교육과정 정합성</td>
-              </tr>
-              <tr>
-                <td>콘텐츠 제작</td>
-                <td>교안/실습자료/예시 초안 생성</td>
-                <td>사실 오류, 난이도 과부하 여부</td>
+                <td>문서/콘텐츠</td>
+                <td>초안 생성, 요약, 구조화</td>
+                <td>사실 검증, 표현 최종 확정</td>
               </tr>
               <tr>
                 <td>프로젝트 관리</td>
-                <td>액션아이템/담당/기한 추출</td>
-                <td>실행 가능성, 책임 공백 여부</td>
+                <td>액션아이템/기한 추출</td>
+                <td>우선순위 결정, 책임자 지정</td>
               </tr>
               <tr>
                 <td>개발/연동</td>
-                <td>응답 구조화, 실패 복구 안내</td>
-                <td>핵심정보 손실, 예외 처리 누락</td>
+                <td>응답 정리, 에러 안내</td>
+                <td>예외 처리, 운영 기준 확정</td>
               </tr>
               <tr>
                 <td>운영/거버넌스</td>
-                <td>민감정보 마스킹, 로그 기록 자동화</td>
-                <td>정책 준수, 책임 추적 가능성</td>
-              </tr>
-              <tr>
-                <td>모바일 활용</td>
-                <td>음성/사진 입력 구조화, 즉시 요약</td>
-                <td>인식 오류, 문맥 누락</td>
+                <td>로그 기록, 마스킹 자동화</td>
+                <td>정책 승인, 감사 대응</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section id="matrix" class="card">
-        <h2>3) 1페이지 실행 매트릭스</h2>
+      <section id="chapter3" class="card chapter" data-chapter="chapter3">
+        <div class="chapter-head">
+          <h2>Chapter 3) 실행 매트릭스 (Do / Don't / Owner)</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-3"> 완료</label>
+        </div>
         <div class="grid two">
           <article class="module">
             <h3>Do</h3>
             <ul>
-              <li>작은 범위부터 시작</li>
-              <li>AI 결과는 초안으로 취급</li>
-              <li>실패 사례를 다음 반복에 반영</li>
-              <li>영역별 책임자(Owner) 명확화</li>
+              <li>도입 영역 1~2개부터 시작</li>
+              <li>AI 결과는 초안으로 처리</li>
+              <li>책임자(Owner)를 명시</li>
             </ul>
           </article>
           <article class="module">
             <h3>Don't</h3>
             <ul>
-              <li>고위험 의사결정에 즉시 연결</li>
-              <li>근거 확인 없이 결과 배포</li>
-              <li>책임자 없는 운영</li>
-              <li>효과 검증 없는 툴 추가</li>
+              <li>고위험 의사결정 즉시 자동화</li>
+              <li>근거 검증 없이 결과 배포</li>
+              <li>실패 원인 기록 생략</li>
             </ul>
           </article>
         </div>
-        <p class="hint">상세 매트릭스 문서: <code>docs/ko/ai-adoption-execution-matrix.md</code></p>
+        <p class="hint">상세 문서: <code>docs/ko/ai-adoption-execution-matrix.md</code></p>
       </section>
 
-      <section id="weekly" class="card">
-        <h2>4) 주간 실행 체크리스트</h2>
-        <p class="hint">체크 상태는 브라우저에 저장됩니다(로컬 저장).</p>
+      <section id="chapter4" class="card chapter" data-chapter="chapter4">
+        <div class="chapter-head">
+          <h2>Chapter 4) 주간 운영 루프</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-4"> 완료</label>
+        </div>
         <div class="checklist" id="weeklyChecklist">
-          <label><input type="checkbox" data-key="w-check-1"> 이번 주 도입 영역 1~2개를 확정했다.</label>
-          <label><input type="checkbox" data-key="w-check-2"> 각 영역별 Do / Don't / Owner를 합의했다.</label>
-          <label><input type="checkbox" data-key="w-check-3"> 사람이 최종 검토할 지점을 문서화했다.</label>
-          <label><input type="checkbox" data-key="w-check-4"> 실패/오류 사례를 최소 2개 기록했다.</label>
-          <label><input type="checkbox" data-key="w-check-5"> 다음 주에는 신규 도입보다 안정화 대상을 정했다.</label>
+          <label><input type="checkbox" data-key="weekly-1"> 이번 주 도입 영역을 확정했다.</label>
+          <label><input type="checkbox" data-key="weekly-2"> Do / Don't / Owner 합의를 마쳤다.</label>
+          <label><input type="checkbox" data-key="weekly-3"> 사람 최종 검토 지점을 문서화했다.</label>
+          <label><input type="checkbox" data-key="weekly-4"> 실패 사례와 수정 계획을 기록했다.</label>
         </div>
       </section>
 
-      <section id="mobile" class="card">
-        <h2>5) 모바일 AI 활용 트랙</h2>
+      <section id="chapter5" class="card chapter" data-chapter="chapter5">
+        <div class="chapter-head">
+          <h2>Chapter 5) 연동과 서비스화</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-5"> 완료</label>
+        </div>
         <div class="grid two">
           <article class="module">
-            <h3>대표 시나리오</h3>
+            <h3>백엔드</h3>
             <ul>
-              <li>음성 -> 텍스트 회의록 변환</li>
-              <li>사진 OCR -> 요약/정리</li>
-              <li>이동 중 3줄 요약 검토</li>
-              <li>현장 질의응답</li>
+              <li>프롬프트 라우팅 규칙</li>
+              <li>에러/타임아웃 처리</li>
+              <li>요청/응답 로깅</li>
             </ul>
           </article>
           <article class="module">
-            <h3>운영 포인트</h3>
+            <h3>프론트</h3>
             <ul>
-              <li>짧은 입력형 템플릿 사용</li>
-              <li>요약 -> 상세보기 구조 유지</li>
-              <li>민감정보 입력 시 마스킹</li>
-              <li>즉시 피드백 후 사람 검토 고정</li>
+              <li>입력 -> 결과 -> 재시도 흐름</li>
+              <li>히스토리 저장</li>
+              <li>사람 검토 확인 UI</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="chapter6" class="card chapter" data-chapter="chapter6">
+        <div class="chapter-head">
+          <h2>Chapter 6) 모바일 트랙</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-6"> 완료</label>
+        </div>
+        <div class="grid two">
+          <article class="module">
+            <h3>시나리오</h3>
+            <ul>
+              <li>음성 회의록 생성</li>
+              <li>사진 OCR 요약</li>
+              <li>현장 즉시 Q&A</li>
+            </ul>
+          </article>
+          <article class="module">
+            <h3>운영 원칙</h3>
+            <ul>
+              <li>짧은 입력 템플릿</li>
+              <li>3줄 요약 -> 상세보기</li>
+              <li>민감정보 마스킹 고정</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="end" class="card chapter" data-chapter="end">
+        <div class="chapter-head">
+          <h2>End) 마무리 및 다음 액션</h2>
+          <label class="chapter-check"><input type="checkbox" data-key="chapter-end"> 완료</label>
+        </div>
+        <p>완주 후에는 신규 도입보다 안정화 우선순위를 정하고 다음 사이클 계획으로 넘어갑니다.</p>
+        <div class="grid two">
+          <article class="module">
+            <h3>완주 체크</h3>
+            <ul>
+              <li>도입 영역 1개 이상 운영 시작</li>
+              <li>실패 사례와 대응책 문서화</li>
+              <li>책임자별 후속 액션 정의</li>
+            </ul>
+          </article>
+          <article class="module">
+            <h3>다음 사이클 질문</h3>
+            <ul>
+              <li>무엇이 가장 큰 시간 절감을 만들었는가?</li>
+              <li>어디서 사람 검토가 가장 중요했는가?</li>
+              <li>다음 주 안정화 대상은 무엇인가?</li>
             </ul>
           </article>
         </div>
@@ -183,5 +243,4 @@
     </main>
   </div>
 </body>
-
 </html>

@@ -70,6 +70,41 @@
 
 ---
 
+## 6-1) 성공 기준 체크리스트 (실행용)
+
+아래 항목이 모두 충족되면 "배포 성공"으로 판단합니다.
+
+### A. GitHub Pages 성공 기준 (master)
+- [ ] GitHub 저장소 Settings > Pages 에서 Source가 **GitHub Actions**로 설정되어 있다.
+- [ ] Actions 탭에서 `Deploy static site to GitHub Pages` 워크플로우가 **success** 상태다.
+- [ ] 배포 URL이 열리고(예: `https://lilyth-y.github.io/ai-toolbox-react/`) 홈 랜딩 페이지가 표시된다.
+- [ ] 홈에서 `ai_resources.html`, `onboarding.html`, `ai_textbook.html`로 이동이 정상이다.
+
+### B. Firebase 성공 기준 (develop)
+- [ ] Actions Secrets에 `FIREBASE_SERVICE_ACCOUNT`, `FIREBASE_PROJECT_ID`가 설정되어 있다.
+- [ ] Actions 탭에서 `React App CI/CD`의 `Deploy to Firebase Hosting` job이 **success** 상태다.
+- [ ] Firebase Hosting URL에서 최신 반영본이 확인된다.
+
+### C. 정책 준수 성공 기준 (혼선 방지)
+- [ ] master push에서는 Pages 배포만 트리거된다.
+- [ ] develop push에서는 Firebase 배포만 트리거된다.
+- [ ] 동일 커밋이 Pages/Firebase에 동시에 배포되지 않는다.
+
+---
+
+## 6-2) 빠른 확인 명령 (GitHub CLI)
+
+로컬에서 아래 명령으로 최근 실행 상태를 빠르게 확인할 수 있습니다.
+
+```bash
+gh run list --limit 10
+gh run list --workflow "Deploy static site to GitHub Pages" --limit 5
+gh run view <run-id>
+gh run view <run-id> --log-failed
+```
+
+---
+
 ## 7) 운영 팁
 
 - 문서/웹교재 업데이트 시 정적 파일만 수정하면 재배포가 단순합니다.

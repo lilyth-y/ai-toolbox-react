@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lilyth-y.github.io/ai-toolbox-react/sitemap.xml

@@ -18,7 +18,11 @@ describe('useGemini', () => {
   it('빈 프롬프트 시 에러 반환', async () => {
     const { result } = renderHook(() => useGemini());
 
-    const response = await result.current.callApi('');
+    let response: string | null = null;
+    await act(async () => {
+      response = await result.current.callApi('');
+    });
+
     expect(response).toBeNull();
     expect(result.current.error).toBe('Prompt cannot be empty');
   });

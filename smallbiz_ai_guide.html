@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Toolbox - 소상공인 AI TOOL 가이드</title>
+  <meta name="description" content="소상공인을 위한 AI TOOL 실전 가이드. 세무/노무, 홍보, 수입/수출, 기타 운영까지 4장 구성으로 데이터 분석, 마케팅, 디지털 특성화를 안내합니다.">
+  <link rel="canonical" href="https://lilyth-y.github.io/ai-toolbox-react/smallbiz_ai_guide.html">
+  <meta property="og:title" content="소상공인 AI TOOL 가이드">
+  <meta property="og:description" content="세무/노무, 홍보, 수입/수출, 기타 운영에 바로 적용하는 4장 구성 AI 가이드">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lilyth-y.github.io/ai-toolbox-react/smallbiz_ai_guide.html">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="소상공인 AI TOOL 가이드">
+  <meta name="twitter:description" content="4장 구성으로 소상공인 AI 도입을 실무 중심으로 안내합니다.">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #0ea5e9;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --sub: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --sub: #94a3b8;
+      --border: #334155;
+      --shadow: 0 14px 30px rgba(2, 6, 23, 0.45);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 70px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(14, 165, 233, 0.1));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .back-link,
+    .theme-btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    .theme-btn { cursor: pointer; }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      line-height: 1.25;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle { margin: 0; color: var(--sub); }
+    .hero-points {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--text);
+    }
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .quick-nav a {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+    .card h2 { margin: 0 0 10px; font-size: 1.3rem; }
+    .card h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .hint { color: var(--sub); margin: 0 0 10px; }
+    .grid {
+      display: grid;
+      gap: 10px;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pillar {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(37, 99, 235, 0.06);
+    }
+    .pillar ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .chapter-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      font-size: 0.82rem;
+      color: #1d4ed8;
+      background: #dbeafe;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+    [data-theme="dark"] .tag {
+      color: #bfdbfe;
+      background: #1e3a8a;
+      border-color: #1d4ed8;
+    }
+    .action-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--sub);
+    }
+    .summary {
+      border-left: 4px solid var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text);
+    }
+    @media (max-width: 860px) {
+      .container { width: min(1100px, 94vw); }
+      .grid.two { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="hero-top">
+        <a href="index.html" class="back-link">← 홈으로</a>
+        <button id="themeToggle" class="theme-btn" aria-label="테마 전환">🌓</button>
+      </div>
+      <h1>소상공인을 위한 AI TOOL 가이드</h1>
+      <p class="subtitle">4개 장으로 핵심 주제를 압축하고, 각 장마다 데이터 분석 · 마케팅 · 디지털 특성화(AI 도입) 방식으로 실무 적용을 안내합니다.</p>
+      <ul class="hero-points">
+        <li>Chapter 1: 세무/노무</li>
+        <li>Chapter 2: 홍보</li>
+        <li>Chapter 3: 수입/수출</li>
+        <li>Chapter 4: 기타(ECT) 운영</li>
+      </ul>
+    </header>
+
+    <nav class="quick-nav" aria-label="장 이동">
+      <a href="#ch1">1장 세무/노무</a>
+      <a href="#ch2">2장 홍보</a>
+      <a href="#ch3">3장 수입/수출</a>
+      <a href="#ch4">4장 ETC 운영</a>
+      <a href="#wrapup">적용 순서</a>
+    </nav>
+
+    <main>
+      <section id="ch1" class="card">
+        <div class="chapter-head">
+          <h2>1장. 세무/노무 자동화</h2>
+          <span class="tag">Tax & Labor AI</span>
+        </div>
+        <p class="hint">복잡한 문서와 반복 확인 업무를 AI로 단순화하고, 최종 판단은 사람(대표/담당자)이 유지합니다.</p>
+        <div class="grid two">
+          <article class="pillar">
+            <h3>데이터 분석</h3>
+            <ul>
+              <li>매출/비용 패턴 요약 리포트 자동 생성</li>
+              <li>인건비/근무기록 이상치 탐지</li>
+              <li>신고 일정 알림 데이터 정리</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>마케팅 관점</h3>
+            <ul>
+              <li>비용 구조를 기반으로 프로모션 여력 계산</li>
+              <li>고정비 대비 캠페인 예산 범위 제안</li>
+              <li>시즌별 인력/운영비 반영한 행사 전략 수립</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>디지털 특성화(AI 도입)</h3>
+            <ul>
+              <li>세무/노무 FAQ 챗봇(내부용) 운영</li>
+              <li>증빙/계약 문서 분류 자동화</li>
+              <li>마감 체크리스트 자동 생성</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>빠른 실행 과제</h3>
+            <ul>
+              <li>이번 달 비용 데이터 1건 업로드</li>
+              <li>세무 일정 알림표 자동 생성</li>
+              <li>담당자 검수 후 확정 프로세스 문서화</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="ch2" class="card">
+        <div class="chapter-head">
+          <h2>2장. 홍보/고객 유입 강화</h2>
+          <span class="tag">Promotion AI</span>
+        </div>
+        <p class="hint">SNS/광고/리뷰를 데이터 기반으로 운영하고, 채널별 메시지를 자동 최적화합니다.</p>
+        <div class="grid two">
+          <article class="pillar">
+            <h3>데이터 분석</h3>
+            <ul>
+              <li>채널별 조회/클릭/전환 요약</li>
+              <li>리뷰 감성 분석으로 불만 포인트 추출</li>
+              <li>시간대별 유입 효율 분석</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>마케팅 관점</h3>
+            <ul>
+              <li>타깃별 광고 문구 자동 생성</li>
+              <li>캠페인 A/B 테스트 문안 생성</li>
+              <li>리뷰 답변 가이드 자동 작성</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>디지털 특성화(AI 도입)</h3>
+            <ul>
+              <li>SNS 게시물 캘린더 자동화</li>
+              <li>상품별 숏폼 대본 자동 생성</li>
+              <li>문의 응답 초안 생성 + 수동 검수</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>빠른 실행 과제</h3>
+            <ul>
+              <li>지난 2주 리뷰 데이터 분석</li>
+              <li>3개 채널용 문안 동시 생성</li>
+              <li>성과 비교표 생성 후 다음 주 전략 확정</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="ch3" class="card">
+        <div class="chapter-head">
+          <h2>3장. 수입/수출 실무 지원</h2>
+          <span class="tag">Import & Export AI</span>
+        </div>
+        <p class="hint">해외 거래에서 문서/규정/커뮤니케이션 부담을 줄이고, 리스크를 조기에 탐지합니다.</p>
+        <div class="grid two">
+          <article class="pillar">
+            <h3>데이터 분석</h3>
+            <ul>
+              <li>거래국가별 주문/반품/클레임 추이 분석</li>
+              <li>물류 리드타임 변동 감지</li>
+              <li>환율 민감도 간이 분석</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>마케팅 관점</h3>
+            <ul>
+              <li>국가별 메시지 현지화 초안</li>
+              <li>해외 고객 응답 템플릿 자동 생성</li>
+              <li>국가별 반응 기반 상품 소개 문구 최적화</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>디지털 특성화(AI 도입)</h3>
+            <ul>
+              <li>통관/거래 문서 요약 자동화</li>
+              <li>다국어 메일 초안 자동 작성</li>
+              <li>규정 변경 모니터링 보조 리포트</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>빠른 실행 과제</h3>
+            <ul>
+              <li>해외 문의 메일 템플릿 3종 작성</li>
+              <li>물류 지연 알림 룰 설정</li>
+              <li>통관 문서 핵심 항목 체크표 생성</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="ch4" class="card">
+        <div class="chapter-head">
+          <h2>4장. ETC 운영 최적화 (재고/고객응대/내부관리)</h2>
+          <span class="tag">ETC Operations AI</span>
+        </div>
+        <p class="hint">기타 운영 업무를 한 섹션으로 묶어, 현장에서 바로 적용 가능한 자동화 포인트를 빠르게 실행합니다.</p>
+        <div class="grid two">
+          <article class="pillar">
+            <h3>데이터 분석</h3>
+            <ul>
+              <li>재고 회전율/결품 위험 예측</li>
+              <li>문의량 피크 시간대 분석</li>
+              <li>반복 민원 유형 클러스터링</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>마케팅 관점</h3>
+            <ul>
+              <li>재구매 고객 대상 리텐션 메시지</li>
+              <li>장바구니 이탈 고객 후속 안내</li>
+              <li>고객 세그먼트별 제안 문구 자동화</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>디지털 특성화(AI 도입)</h3>
+            <ul>
+              <li>CS 응답 초안 자동 생성</li>
+              <li>내부 매뉴얼 Q&A 검색 시스템</li>
+              <li>업무 보고서 자동 요약</li>
+            </ul>
+          </article>
+          <article class="pillar">
+            <h3>빠른 실행 과제</h3>
+            <ul>
+              <li>반복 문의 20건 분류</li>
+              <li>응답 템플릿 5종 정리</li>
+              <li>주간 운영 리포트 자동 요약 적용</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="wrapup" class="card">
+        <h2>적용 순서 (권장)</h2>
+        <p class="summary">
+          1) 세무/노무 -> 2) 홍보 -> 3) 수입/수출 -> 4) ETC 운영 순서로 확장하면,  
+          리스크를 낮추면서도 실제 성과를 빠르게 확인할 수 있습니다.
+        </p>
+        <ul class="action-list">
+          <li>주마다 각 장에서 1개 과제만 실행</li>
+          <li>사람 검토 지점(최종 승인)을 명시</li>
+          <li>성과/실패를 다음 주 계획에 반영</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const themeToggle = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem("smallbiz_ai_guide_theme");
+      if (savedTheme === "dark") {
+        document.body.setAttribute("data-theme", "dark");
+      }
+      themeToggle?.addEventListener("click", function () {
+        const isDark = document.body.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          document.body.removeAttribute("data-theme");
+          localStorage.setItem("smallbiz_ai_guide_theme", "light");
+        } else {
+          document.body.setAttribute("data-theme", "dark");
+          localStorage.setItem("smallbiz_ai_guide_theme", "dark");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

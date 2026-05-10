@@ -189,6 +189,27 @@
       background: var(--card);
       overflow: hidden;
     }
+    .industry-tabs {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .industry-tab {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .industry-tab.active {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #ffffff;
+    }
     .prompt-head {
       display: flex;
       align-items: center;
@@ -341,6 +362,12 @@
           <article class="tool-card"><strong>Claude</strong><span>복잡한 계약서 조항 설명</span></article>
           <article class="tool-card"><strong>Google Sheets AI</strong><span>인건비/비용 변동 요약</span></article>
         </div>
+        <div class="industry-tabs" data-chapter="ch1" aria-label="1장 업종 선택">
+          <button type="button" class="industry-tab active" data-industry="cafe">카페</button>
+          <button type="button" class="industry-tab" data-industry="restaurant">식당</button>
+          <button type="button" class="industry-tab" data-industry="retail">소매</button>
+          <button type="button" class="industry-tab" data-industry="service">서비스</button>
+        </div>
         <div class="prompt-box">
           <div class="prompt-head">
             <strong>복붙 프롬프트 (세무/노무)</strong>
@@ -408,6 +435,12 @@
           <article class="tool-card"><strong>Meta Ads AI</strong><span>광고 문구/타깃 조합 실험</span></article>
           <article class="tool-card"><strong>Google Trends</strong><span>키워드 수요 추이 확인</span></article>
           <article class="tool-card"><strong>Typefully</strong><span>게시 캘린더 자동 운영</span></article>
+        </div>
+        <div class="industry-tabs" data-chapter="ch2" aria-label="2장 업종 선택">
+          <button type="button" class="industry-tab active" data-industry="cafe">카페</button>
+          <button type="button" class="industry-tab" data-industry="restaurant">식당</button>
+          <button type="button" class="industry-tab" data-industry="retail">소매</button>
+          <button type="button" class="industry-tab" data-industry="service">서비스</button>
         </div>
         <div class="prompt-box">
           <div class="prompt-head">
@@ -477,6 +510,12 @@
           <article class="tool-card"><strong>Notion AI</strong><span>통관 문서 요약 정리</span></article>
           <article class="tool-card"><strong>Sheets + AI</strong><span>리드타임/환율 영향 분석</span></article>
         </div>
+        <div class="industry-tabs" data-chapter="ch3" aria-label="3장 업종 선택">
+          <button type="button" class="industry-tab active" data-industry="cafe">카페</button>
+          <button type="button" class="industry-tab" data-industry="restaurant">식당</button>
+          <button type="button" class="industry-tab" data-industry="retail">소매</button>
+          <button type="button" class="industry-tab" data-industry="service">서비스</button>
+        </div>
         <div class="prompt-box">
           <div class="prompt-head">
             <strong>복붙 프롬프트 (수입/수출)</strong>
@@ -544,6 +583,12 @@
           <article class="tool-card"><strong>Looker Studio</strong><span>재고/문의 KPI 대시보드</span></article>
           <article class="tool-card"><strong>Zapier AI</strong><span>반복 업무 자동 트리거</span></article>
         </div>
+        <div class="industry-tabs" data-chapter="ch4" aria-label="4장 업종 선택">
+          <button type="button" class="industry-tab active" data-industry="cafe">카페</button>
+          <button type="button" class="industry-tab" data-industry="restaurant">식당</button>
+          <button type="button" class="industry-tab" data-industry="retail">소매</button>
+          <button type="button" class="industry-tab" data-industry="service">서비스</button>
+        </div>
         <div class="prompt-box">
           <div class="prompt-head">
             <strong>복붙 프롬프트 (ETC 운영)</strong>
@@ -588,6 +633,120 @@
       const toast = document.getElementById("toast");
       const savedTheme = localStorage.getItem("smallbiz_ai_guide_theme");
       const checklistKey = "smallbiz_ai_guide_checks_v1";
+      const promptIndustryKey = "smallbiz_ai_guide_prompt_industry_v1";
+      const promptTemplates = {
+        ch1: {
+          cafe: `너는 카페 운영 세무·노무 어시스턴트다.
+아래 데이터를 바탕으로 이번 주 점검표를 작성해라.
+- 입력: 일별 매출, 원두/유제품 원가, 근무 스케줄
+- 출력1: 세무/노무 필수 확인 5개
+- 출력2: 비용 이상 신호 3개(원인 포함)
+- 출력3: 대표 최종 승인 항목 3개
+표 형식으로 간결하게 작성해라.`,
+          restaurant: `너는 식당 운영 세무·노무 어시스턴트다.
+아래 데이터를 바탕으로 주간 점검표를 작성해라.
+- 입력: 매출, 식자재 원가, 배달 수수료, 근무기록
+- 출력1: 신고/노무 필수 확인 5개
+- 출력2: 인건비/원가 리스크 3개
+- 출력3: 사장이 최종 승인할 항목 3개
+실행 우선순위 순으로 정리해라.`,
+          retail: `너는 소매점 세무·노무 운영 코디네이터다.
+입력 데이터(매출, 재고원가, 인력 근무표)를 기반으로
+1) 주간 점검표 5개
+2) 비용/노무 리스크 3개
+3) 대표 승인 항목 3개
+를 표로 작성해라.`,
+          service: `너는 서비스업(학원/미용/수리 등) 세무·노무 어시스턴트다.
+입력: 예약 매출, 인건비, 수수료, 근무일지
+출력:
+1) 필수 점검 5개
+2) 노무/비용 리스크 3개
+3) 최종 승인 항목 3개
+체크리스트 형식으로 작성해라.`
+        },
+        ch2: {
+          cafe: `너는 카페 마케팅 매니저다.
+타깃=[오피스 고객], 핵심상품=[시그니처 커피], 예산=[주 20만원].
+아래 채널용 홍보안을 작성해라.
+1) 인스타 피드 2종
+2) 네이버 플레이스 공지 1종
+3) 카카오 알림 1종
+각 문안에 CTA 1개, 해시태그 3개를 넣어라.`,
+          restaurant: `너는 식당 마케팅 매니저다.
+타깃=[점심 직장인/저녁 가족], 핵심상품=[대표 메뉴], 예산=[주 30만원].
+채널별 홍보안을 작성해라.
+1) 인스타 릴스 대본
+2) 블로그 맛집 포스팅 초안
+3) 재방문 유도 문자
+각 문안에 예약 유도 문구를 포함해라.`,
+          retail: `너는 소매점 마케팅 매니저다.
+타깃=[20~40대], 핵심상품=[신상품], 예산=[주 15만원].
+아래 3채널 홍보안을 작성해라.
+1) 인스타 카드뉴스 문안
+2) 네이버 쇼핑 스토어 공지
+3) 카카오 채널 메시지
+채널별 핵심 키워드 3개를 제시해라.`,
+          service: `너는 서비스업 마케팅 매니저다.
+타깃=[지역 고객], 핵심서비스=[주력 서비스], 예산=[주 10만원].
+채널별 홍보안을 작성해라.
+1) 인스타/블로그 안내글
+2) 고객 후기 요청 메시지
+3) 재예약 유도 메시지
+각 문안에 신뢰 확보 문장을 추가해라.`
+        },
+        ch3: {
+          cafe: `너는 카페 수입 실무 담당자다.
+아래 정보를 바탕으로 해외 원두 공급사 문의 메일을 작성해라.
+- 언어: 영어/한국어 병기
+- 포함: MOQ, 리드타임, 결제조건, 샘플 요청
+마지막에 통관 문서 체크리스트 5개를 붙여라.`,
+          restaurant: `너는 식당 식자재 수입 실무 담당자다.
+해외 공급사에 보낼 메일을 작성해라.
+- 언어: 영어/한국어 병기
+- 포함: 납기, 냉장/냉동 조건, 결제조건, 위생 인증 요청
+그리고 통관 체크리스트 5개를 추가해라.`,
+          retail: `너는 소매점 수입/수출 담당자다.
+해외 거래 문의 메일 초안을 작성해라.
+- 언어: 영어/한국어
+- 포함: MOQ, 납기, 포장 규격, 반품 조건
+추가로 통관 서류 체크리스트 5개를 정리해라.`,
+          service: `너는 서비스업 해외 협력 담당자다.
+아래 조건으로 파트너십 제안 메일을 작성해라.
+- 언어: 영어/한국어
+- 포함: 서비스 범위, 일정, 결제조건, SLA
+마지막에 계약 전 확인 체크리스트 5개를 작성해라.`
+        },
+        ch4: {
+          cafe: `너는 카페 운영 코디네이터다.
+입력: 재고, 문의 로그, 클레임, 재구매 고객 수
+출력:
+1) 이번 주 핵심 이슈 3개
+2) 즉시 실행 과제 5개(담당/기한)
+3) 다음 주 자동화 후보 3개
+표+불릿 형식으로 작성해라.`,
+          restaurant: `너는 식당 운영 코디네이터다.
+입력: 식자재 재고, 예약/대기 문의, 리뷰 불만, 재방문율
+출력:
+1) 운영 이슈 3개
+2) 즉시 실행 과제 5개(담당/기한)
+3) 자동화 후보 3개
+실행 우선순위 포함.`,
+          retail: `너는 소매점 운영 코디네이터다.
+입력: 재고 회전율, 결품 내역, 고객 문의, 반품 사유
+출력:
+1) 핵심 문제 3개
+2) 즉시 실행 과제 5개
+3) 자동화 후보 3개
+보고서 형태로 작성해라.`,
+          service: `너는 서비스업 운영 코디네이터다.
+입력: 예약/취소 데이터, 고객 문의, 재방문율, CS 로그
+출력:
+1) 핵심 이슈 3개
+2) 실행 과제 5개(담당/기한)
+3) 다음 주 자동화 후보 3개
+팀 공유용 요약으로 작성해라.`
+        }
+      };
 
       if (savedTheme === "dark") {
         document.body.setAttribute("data-theme", "dark");
@@ -624,6 +783,47 @@
           copyText(value.trim())
             .then(function () { showToast("프롬프트를 복사했습니다."); })
             .catch(function () { showToast("복사에 실패했습니다."); });
+        });
+      });
+
+      let promptIndustry = {};
+      try {
+        promptIndustry = JSON.parse(localStorage.getItem(promptIndustryKey) || "{}");
+      } catch (error) {
+        promptIndustry = {};
+      }
+
+      function setPromptByIndustry(chapter, industry) {
+        const target = document.getElementById("prompt-" + chapter);
+        const chapterPrompts = promptTemplates[chapter];
+        if (!target || !chapterPrompts) return;
+        target.value = chapterPrompts[industry] || chapterPrompts.cafe || "";
+      }
+
+      document.querySelectorAll(".industry-tabs").forEach(function (wrap) {
+        const chapter = wrap.getAttribute("data-chapter");
+        if (!chapter) return;
+
+        const savedIndustry = promptIndustry[chapter] || "cafe";
+        wrap.querySelectorAll(".industry-tab").forEach(function (btn) {
+          const industry = btn.getAttribute("data-industry");
+          const isActive = industry === savedIndustry;
+          btn.classList.toggle("active", isActive);
+        });
+        setPromptByIndustry(chapter, savedIndustry);
+
+        wrap.querySelectorAll(".industry-tab").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            const industry = btn.getAttribute("data-industry");
+            if (!industry) return;
+            wrap.querySelectorAll(".industry-tab").forEach(function (other) {
+              other.classList.remove("active");
+            });
+            btn.classList.add("active");
+            promptIndustry[chapter] = industry;
+            localStorage.setItem(promptIndustryKey, JSON.stringify(promptIndustry));
+            setPromptByIndustry(chapter, industry);
+          });
         });
       });
 

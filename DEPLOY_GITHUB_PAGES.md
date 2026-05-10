@@ -73,6 +73,7 @@
 ## 6-1) 성공 기준 체크리스트 (실행용)
 
 아래 항목이 모두 충족되면 "배포 성공"으로 판단합니다.
+Firebase 시크릿을 빠르게 점검하려면 `docs/ko/firebase-develop-deploy-checklist.md`를 함께 확인하세요.
 
 ### A. GitHub Pages 성공 기준 (master)
 - [ ] GitHub 저장소 Settings > Pages 에서 Source가 **GitHub Actions**로 설정되어 있다.

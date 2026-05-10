@@ -99,3 +99,68 @@
   - 예: 먼저 Secret 이름만 수정 -> 재실행
   - 다음 실험에서만 권한/값 변경
 
+---
+
+## 7) Secrets 입력값 예시 + JSON 처리 주의점
+
+아래 예시는 **형식 참고용 더미 값**입니다. 실제 키/토큰은 절대 문서나 코드에 남기지 마세요.
+
+### 7-1) `FIREBASE_PROJECT_ID` 예시
+
+```text
+my-company-web-prod
+```
+
+### 7-2) `FIREBASE_SERVICE_ACCOUNT` 예시 (구조)
+
+```json
+{
+  "type": "service_account",
+  "project_id": "my-company-web-prod",
+  "private_key_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEv...snip...\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-xxxx@my-company-web-prod.iam.gserviceaccount.com",
+  "client_id": "123456789012345678901",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token"
+}
+```
+
+### 7-3) 붙여넣기 실수 방지 체크리스트
+
+- [ ] JSON 전체를 처음 `{`부터 마지막 `}`까지 통째로 복사했는가
+- [ ] `private_key` 내부의 `\\n`을 임의로 지우거나 실제 개행으로 바꾸지 않았는가
+- [ ] JSON 키 이름(`project_id`, `client_email` 등)을 수정하지 않았는가
+- [ ] GitHub Secret 이름(`FIREBASE_SERVICE_ACCOUNT`)을 정확히 입력했는가
+- [ ] Secret 값 앞뒤 공백이 들어가지 않았는가
+
+> 특히 `private_key` 형식이 깨지면 `Failed to authenticate`가 거의 확정적으로 발생합니다.
+
+---
+
+## 8) 10분 운영 매뉴얼 (복붙용 순서)
+
+### Step A. Secrets 등록
+1. GitHub 저장소 -> Settings -> Secrets and variables -> Actions
+2. `New repository secret` 클릭
+3. 아래 2개를 정확한 이름으로 저장
+   - `FIREBASE_PROJECT_ID`
+   - `FIREBASE_SERVICE_ACCOUNT`
+
+### Step B. 최소 변경 커밋 후 `develop` push
+- 문서 한 줄 변경 등 작은 수정 1건으로 테스트 트리거
+- 한 번에 여러 설정을 바꾸지 않음(원인 분리 목적)
+
+### Step C. Actions 결과 확인
+- `React App CI/CD` 실행 열기
+- `Lint, test, and build` -> success
+- `Deploy to Firebase Hosting` -> success
+
+### Step D. 실제 서비스 검증
+- Firebase Hosting URL 접속
+- 최신 변경 반영 여부 + 핵심 페이지 진입 확인
+
+### Step E. 실패 시 즉시 되돌아가기
+- 에러 메시지에서 누락 키/인증 에러 확인
+- 해당 Secret만 수정 후 재실행 (다른 변수는 건드리지 않음)
+

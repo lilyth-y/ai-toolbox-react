@@ -5,6 +5,18 @@
 
 ---
 
+## 빠른 시작 (처음 사용자용 30초 버전)
+
+아래 3가지만 하면 됩니다.
+
+1. GitHub Actions Secrets에 `FIREBASE_PROJECT_ID`, `FIREBASE_SERVICE_ACCOUNT` 등록
+2. `develop` 브랜치에 작은 변경 1건 push
+3. Actions에서 `Deploy to Firebase Hosting`가 success인지 확인
+
+성공하면 끝입니다. 아래 상세 섹션은 **실패했을 때만** 확인하세요.
+
+---
+
 ## 0) 배포 조건 요약
 
 - Firebase 배포는 **push to `develop`**일 때만 실행됩니다.
@@ -54,7 +66,7 @@
 
 ---
 
-## 4) 3단계 검증 (Tiered Evaluation)
+## 4) (선택) 실패 시 확인용 3단계 검증
 
 ### Tier 1: 실행 가능성 검증 (로컬)
 - [ ] `cd ai-toolbox-react`
@@ -74,7 +86,7 @@
 
 ---
 
-## 5) 자주 실패하는 케이스와 즉시 조치
+## 5) (선택) 자주 실패하는 케이스와 즉시 조치
 
 1. **`Input required and not supplied: firebaseServiceAccount`**
    - 원인: `FIREBASE_SERVICE_ACCOUNT` 누락 또는 이름 오타
@@ -101,7 +113,7 @@
 
 ---
 
-## 7) Secrets 입력값 예시 + JSON 처리 주의점
+## 7) (선택) Secrets 입력값 예시 + JSON 처리 주의점
 
 아래 예시는 **형식 참고용 더미 값**입니다. 실제 키/토큰은 절대 문서나 코드에 남기지 마세요.
 
@@ -138,7 +150,7 @@ my-company-web-prod
 
 ---
 
-## 8) 10분 운영 매뉴얼 (복붙용 순서)
+## 8) (선택) 10분 운영 매뉴얼 (복붙용 순서)
 
 ### Step A. Secrets 등록
 1. GitHub 저장소 -> Settings -> Secrets and variables -> Actions

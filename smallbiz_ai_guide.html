@@ -101,6 +101,33 @@
       font-size: 0.9rem;
       font-weight: 600;
     }
+    .share-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 0 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: var(--card);
+    }
+    .share-bar span {
+      font-size: 0.88rem;
+      color: var(--sub);
+      font-weight: 600;
+    }
+    .share-btn {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -286,6 +313,7 @@
       .container { width: min(1100px, 94vw); }
       .grid.two { grid-template-columns: 1fr; }
       .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .share-bar { align-items: flex-start; }
     }
   </style>
 </head>
@@ -313,6 +341,10 @@
       <a href="#ch4">4장 ETC 운영</a>
       <a href="#wrapup">적용 순서</a>
     </nav>
+    <div class="share-bar">
+      <span id="industryShareHint">현재 업종 공유값: cafe</span>
+      <button id="copyShareLinkBtn" type="button" class="share-btn">현재 업종 링크 복사</button>
+    </div>
 
     <main>
       <section id="ch1" class="card">
@@ -631,9 +663,18 @@
     (function () {
       const themeToggle = document.getElementById("themeToggle");
       const toast = document.getElementById("toast");
+      const shareHint = document.getElementById("industryShareHint");
+      const copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
       const savedTheme = localStorage.getItem("smallbiz_ai_guide_theme");
       const checklistKey = "smallbiz_ai_guide_checks_v1";
       const promptIndustryKey = "smallbiz_ai_guide_prompt_industry_v1";
+      const industryLabels = {
+        cafe: "카페",
+        restaurant: "식당",
+        retail: "소매",
+        service: "서비스"
+      };
+      const allowedIndustries = Object.keys(industryLabels);
       const promptTemplates = {
         ch1: {
           cafe: `너는 카페 운영 세무·노무 어시스턴트다.
@@ -800,6 +841,44 @@
         target.value = chapterPrompts[industry] || chapterPrompts.cafe || "";
       }
 
+      function getIndustryFromUrl() {
+        const url = new URL(window.location.href);
+        const industry = url.searchParams.get("industry");
+        if (!industry) return null;
+        return allowedIndustries.includes(industry) ? industry : null;
+      }
+
+      function updateShareHint(industry) {
+        if (!shareHint) return;
+        const label = industryLabels[industry] || industry;
+        shareHint.textContent = "현재 업종 공유값: " + industry + " (" + label + ")";
+      }
+
+      function applyIndustryAcrossChapters(industry, updateUrl) {
+        if (!allowedIndustries.includes(industry)) return;
+
+        document.querySelectorAll(".industry-tabs").forEach(function (wrap) {
+          const chapter = wrap.getAttribute("data-chapter");
+          if (!chapter) return;
+
+          wrap.querySelectorAll(".industry-tab").forEach(function (btn) {
+            const isActive = btn.getAttribute("data-industry") === industry;
+            btn.classList.toggle("active", isActive);
+          });
+          promptIndustry[chapter] = industry;
+          setPromptByIndustry(chapter, industry);
+        });
+
+        localStorage.setItem(promptIndustryKey, JSON.stringify(promptIndustry));
+        updateShareHint(industry);
+
+        if (updateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("industry", industry);
+          window.history.replaceState({}, "", url.toString());
+        }
+      }
+
       document.querySelectorAll(".industry-tabs").forEach(function (wrap) {
         const chapter = wrap.getAttribute("data-chapter");
         if (!chapter) return;
@@ -816,15 +895,19 @@
           btn.addEventListener("click", function () {
             const industry = btn.getAttribute("data-industry");
             if (!industry) return;
-            wrap.querySelectorAll(".industry-tab").forEach(function (other) {
-              other.classList.remove("active");
-            });
-            btn.classList.add("active");
-            promptIndustry[chapter] = industry;
-            localStorage.setItem(promptIndustryKey, JSON.stringify(promptIndustry));
-            setPromptByIndustry(chapter, industry);
+            applyIndustryAcrossChapters(industry, true);
+            showToast("업종을 " + (industryLabels[industry] || industry) + "으로 설정했습니다.");
           });
         });
+      });
+
+      const initialIndustry = getIndustryFromUrl() || promptIndustry.ch1 || "cafe";
+      applyIndustryAcrossChapters(initialIndustry, Boolean(getIndustryFromUrl()));
+
+      copyShareLinkBtn?.addEventListener("click", function () {
+        copyText(window.location.href)
+          .then(function () { showToast("공유 링크를 복사했습니다."); })
+          .catch(function () { showToast("링크 복사에 실패했습니다."); });
       });
 
       let checks = {};

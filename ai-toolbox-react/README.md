@@ -159,6 +159,13 @@ npm run build
 firebase deploy
 ```
 
+#### GitHub Actions에서 develop 배포 검증하기
+
+- `develop` 브랜치 push 시 `React App CI/CD`가 실행됩니다.
+- `Deploy to Firebase Hosting` 성공을 위해 아래 Secrets가 필요합니다.
+  - `FIREBASE_PROJECT_ID`
+  - `FIREBASE_SERVICE_ACCOUNT`
+
 ### Netlify
 
 ```bash

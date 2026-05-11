@@ -165,6 +165,7 @@ firebase deploy
 - `Deploy to Firebase Hosting` 성공을 위해 아래 Secrets가 필요합니다.
   - `FIREBASE_PROJECT_ID`
   - `FIREBASE_SERVICE_ACCOUNT`
+- 시크릿 설정/오류 대응은 `docs/ko/firebase-develop-deploy-checklist.md`를 참고하세요.
 
 ### Netlify
 

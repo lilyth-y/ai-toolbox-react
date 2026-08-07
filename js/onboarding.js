@@ -65,6 +65,46 @@ const recommendations = {
   }
 };
 
+const GEMINI_API_KEY_STORAGE_KEY = 'gemini_api_key';
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function toSafeMultilineHtml(value) {
+  return escapeHtml(value).replace(/\n/g, '<br>');
+}
+
+function getGeminiApiKey() {
+  // Backward-compat: migrate old localStorage key to sessionStorage.
+  const sessionKey = sessionStorage.getItem(GEMINI_API_KEY_STORAGE_KEY);
+  if (sessionKey) return sessionKey;
+
+  const legacyKey = localStorage.getItem(GEMINI_API_KEY_STORAGE_KEY);
+  if (legacyKey) {
+    sessionStorage.setItem(GEMINI_API_KEY_STORAGE_KEY, legacyKey);
+    localStorage.removeItem(GEMINI_API_KEY_STORAGE_KEY);
+    return legacyKey;
+  }
+
+  return '';
+}
+
+function setGeminiApiKey(key) {
+  if (key) {
+    sessionStorage.setItem(GEMINI_API_KEY_STORAGE_KEY, key);
+  } else {
+    sessionStorage.removeItem(GEMINI_API_KEY_STORAGE_KEY);
+  }
+  // Ensure no long-lived copy remains in localStorage.
+  localStorage.removeItem(GEMINI_API_KEY_STORAGE_KEY);
+}
+
 function selectRole(role) {
   state.role = role;
   document.getElementById('step1').classList.remove('active');
@@ -137,7 +177,7 @@ const modal = document.getElementById('settingsModal');
 const apiKeyInput = document.getElementById('apiKeyInput');
 
 // Load Key on Start
-const savedKey = localStorage.getItem('gemini_api_key');
+const savedKey = getGeminiApiKey();
 if (savedKey) {
   apiKeyInput.value = savedKey;
   updateBadge(true);
@@ -154,11 +194,11 @@ function closeSettings() {
 function saveSettings() {
   const key = apiKeyInput.value.trim();
   if (key) {
-    localStorage.setItem('gemini_api_key', key);
+    setGeminiApiKey(key);
     updateBadge(true);
-    alert("API Key가 저장되었습니다. 이제 실제 AI가 동작합니다! 🧠");
+    alert("API Key가 현재 브라우저 세션에 저장되었습니다. 이제 실제 AI가 동작합니다! 🧠");
   } else {
-    localStorage.removeItem('gemini_api_key');
+    setGeminiApiKey('');
     updateBadge(false);
     alert("API Key가 삭제되었습니다. 시뮬레이션 모드로 전환됩니다.");
   }
@@ -181,15 +221,18 @@ function updateBadge(isReal) {
 
 /* API Call Logic */
 async function callGemini(prompt) {
-  const key = localStorage.getItem('gemini_api_key');
+  const key = getGeminiApiKey();
   if (!key) return null; // Fallback to simulation
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': key
+      },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }]
       })
@@ -221,7 +264,7 @@ async function runSimulation() {
   userMsg.className = 'sim-msg';
   userMsg.innerHTML = `
     <div class="sim-avatar" style="background: #6b7280">👤</div>
-    <div class="sim-content" style="background: #4b5563; color: white;">${input.replace(/\n/g, '<br>')}</div>
+    <div class="sim-content" style="background: #4b5563; color: white;">${toSafeMultilineHtml(input)}</div>
   `;
   chatSim.appendChild(userMsg);
   chatSim.scrollTop = chatSim.scrollHeight;
@@ -268,16 +311,18 @@ async function runSimulation() {
       // Simple cleanup if MD block is returned
       let cleanJson = realResponse.replace(/```json/g, '').replace(/```/g, '');
       const data = JSON.parse(cleanJson);
+      const critiqueText = typeof data.critique === 'string' ? data.critique : '';
+      const responseBodyText = typeof data.response === 'string' ? data.response : '';
 
       analysis = { ...data.scores, score: (data.scores.s + data.scores.r + data.scores.c) / 3 };
 
       updateAnalysisPanel(analysis);
       // Show Critique + Response
-      responseText = `<strong>[AI 분석]</strong> ${data.critique}<br><br><hr style="border-color:#555; margin:8px 0;">${data.response}`;
+      responseText = `<strong>[AI 분석]</strong> ${toSafeMultilineHtml(critiqueText)}<br><br><hr style="border-color:#555; margin:8px 0;">${toSafeMultilineHtml(responseBodyText)}`;
 
     } catch (e) {
       console.error("JSON Parse Error", e);
-      responseText = "AI 응답을 해석하는데 실패했습니다. (Raw: " + realResponse + ")";
+      responseText = "AI 응답을 해석하는데 실패했습니다. 응답 형식을 다시 확인해주세요.";
     }
   } else {
     // Fallback to Simulation
@@ -353,7 +398,7 @@ function autoOptimize() {
   }
 
   // Check if Real AI is on
-  const key = localStorage.getItem('gemini_api_key');
+  const key = getGeminiApiKey();
   if (key) {
     input.value = "AI가 최적화 중입니다...";
     callGemini(`Refine this prompt using the 'Role-Instruction-Specifics-Parameters' framework. Return ONLY the refined prompt text without markdown.\n\nOriginal: "${current}"`)

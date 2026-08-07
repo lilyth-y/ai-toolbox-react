@@ -10,6 +10,7 @@ interface SettingsModalProps {
 const SettingsModal: FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const [keyInput, setKeyInput] = useState('');
   const { t } = useAppTranslation();
+  const GEMINI_API_KEY_STORAGE_KEY = 'gemini_api_key';
 
   // ESC 키로 닫기
   useEffect(() => {
@@ -25,17 +26,33 @@ const SettingsModal: FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const sessionKey = sessionStorage.getItem(GEMINI_API_KEY_STORAGE_KEY);
+    const legacyLocalKey = localStorage.getItem(GEMINI_API_KEY_STORAGE_KEY);
+    const activeKey = sessionKey || legacyLocalKey || '';
+
+    if (!sessionKey && legacyLocalKey) {
+      sessionStorage.setItem(GEMINI_API_KEY_STORAGE_KEY, legacyLocalKey);
+      localStorage.removeItem(GEMINI_API_KEY_STORAGE_KEY);
+    }
+
+    setKeyInput(activeKey);
+  }, [isOpen]);
+
   const handleSave = () => {
-    localStorage.setItem('gemini_api_key', keyInput);
+    const trimmedKey = keyInput.trim();
+    if (trimmedKey) {
+      sessionStorage.setItem(GEMINI_API_KEY_STORAGE_KEY, trimmedKey);
+    } else {
+      sessionStorage.removeItem(GEMINI_API_KEY_STORAGE_KEY);
+    }
+    localStorage.removeItem(GEMINI_API_KEY_STORAGE_KEY);
     onClose();
   };
 
   if (!isOpen) return null;
-
-  // Modal이 열릴 때 현재 API 키로 input 초기화
-  if (isOpen && keyInput === '') {
-    setKeyInput(localStorage.getItem('gemini_api_key') || '');
-  }
 
   return (
     <div className="modal-overlay open" onClick={onClose} role="presentation">
@@ -62,7 +79,7 @@ const SettingsModal: FC<SettingsModalProps> = ({ isOpen, onClose }) => {
         <div id="modal-description" style={{ marginBottom: '24px', color: 'var(--text-sub)', fontSize: '0.95rem' }}>
           {t('settings.description') || 'Google의 Gemini API Key를 입력하면, 시뮬레이터가 아닌 실제 AI가 동작합니다.'}
           <br />
-          {t('settings.privacy') || '키는 브라우저(로컬)에만 저장되며 외부로 전송되지 않습니다.'}
+          {t('settings.privacy') || '키는 현재 브라우저 세션에 저장되며, Gemini API 호출 시 Google로 전송됩니다.'}
           <br /><br />
           <a 
             href="https://aistudio.google.com/app/apikey" 

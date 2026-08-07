@@ -15,7 +15,7 @@
 ## 2) 현재 프로젝트 기준 보안 체크
 
 ### 확인 결과
-- `onboarding.html` + `js/onboarding.js`는 사용자 입력 API 키를 `localStorage`에 저장해 직접 Gemini API를 호출하는 BYOK 구조입니다.
+- `onboarding.html` + `js/onboarding.js`는 사용자 입력 API 키를 **sessionStorage(브라우저 세션)** 에 저장해 직접 Gemini API를 호출하는 BYOK 구조입니다.
 - 이 방식은 "사용자 본인 키를 브라우저에서 사용"하는 용도로는 가능하지만, 사이트 운영자 비밀키를 넣는 구조로 쓰면 안 됩니다.
 
 ### 권장 방침

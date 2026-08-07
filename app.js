@@ -1,35 +1,68 @@
 // AI Toolbox 애플리케이션 로직
 
+const ALLOWED_TOOL_CATEGORIES = new Set(['llm', 'research', 'design', 'coding', 'other']);
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function normalizeHttpUrl(value) {
+  try {
+    const url = new URL(String(value ?? ''), window.location.origin);
+    if (url.protocol === 'http:' || url.protocol === 'https:') {
+      return url.toString();
+    }
+  } catch (error) {
+    // Ignore parsing errors and fall back to safe no-op URL.
+  }
+  return '#';
+}
+
 // 카드 생성 함수
 function createCard(tool) {
   const card = document.createElement('article');
+  const safeCategory = ALLOWED_TOOL_CATEGORIES.has(tool.category) ? tool.category : 'other';
+  const safeName = escapeHtml(tool.name);
+  const safeOptimized = escapeHtml(tool.optimized);
+  const safePurpose = escapeHtml(tool.purpose);
+  const safeMethod = escapeHtml(tool.method);
+  const safeToolUrl = normalizeHttpUrl(tool.url);
+  const safeButtonText = escapeHtml(tool.buttonText || '바로가기');
+  const safeId = String(tool.id ?? '');
   card.className = 'card';
-  card.setAttribute('data-category', tool.category);
+  card.setAttribute('data-category', safeCategory);
   card.setAttribute('data-educator', tool.educator);
-  card.setAttribute('data-id', tool.id);
+  card.setAttribute('data-id', safeId);
 
   // 카테고리 배지
   const categoryLabel = tool.categoryLabel || 
-    (tool.category === 'llm' ? 'LLM' :
-     tool.category === 'research' ? '연구' :
-     tool.category === 'design' ? '디자인' :
-     tool.category === 'coding' ? '코딩' : '기타');
+    (safeCategory === 'llm' ? 'LLM' :
+     safeCategory === 'research' ? '연구' :
+     safeCategory === 'design' ? '디자인' :
+     safeCategory === 'coding' ? '코딩' : '기타');
+  const safeCategoryLabel = escapeHtml(categoryLabel);
 
-  let badgeHTML = `<span class="category-badge cat-${tool.category}">${categoryLabel}</span>`;
+  let badgeHTML = `<span class="category-badge cat-${safeCategory}">${safeCategoryLabel}</span>`;
   if (tool.educator) {
-    const eduBadgeText = tool.educatorBadge || '교수/교사 가능';
+    const eduBadgeText = escapeHtml(tool.educatorBadge || '교수/교사 가능');
     badgeHTML += `<span class="edu-badge">${eduBadgeText}</span>`;
   }
 
   // 가격 정보
-  let priceHTML = tool.cost;
+  let priceHTML = escapeHtml(tool.cost);
   if (tool.originalPrice) {
-    priceHTML += ` <span class="original-price">${tool.originalPrice}</span>`;
+    priceHTML += ` <span class="original-price">${escapeHtml(tool.originalPrice)}</span>`;
   }
 
   // 태그
-  const tagsHTML = tool.tags.map(tag => 
-    `<span class="tag" data-tag="${tag}" role="button" tabindex="0" aria-label="${tag} 태그 필터">#${tag}</span>`
+  const tags = Array.isArray(tool.tags) ? tool.tags : [];
+  const tagsHTML = tags.map(tag => 
+    `<span class="tag" data-tag="${escapeHtml(tag)}" role="button" tabindex="0" aria-label="${escapeHtml(tag)} 태그 필터">#${escapeHtml(tag)}</span>`
   ).join('');
 
   card.innerHTML = `
@@ -38,41 +71,41 @@ function createCard(tool) {
         ${badgeHTML}
       </div>
     </div>
-    <h3 class="program-name">${tool.name}</h3>
+    <h3 class="program-name">${safeName}</h3>
     <div class="cost-info">${priceHTML}</div>
     <table class="data-table">
       <tr class="data-row">
         <td class="data-label">최적화</td>
-        <td class="data-val optimized-text">${tool.optimized}</td>
+        <td class="data-val optimized-text">${safeOptimized}</td>
       </tr>
       <tr class="data-row">
         <td class="data-label">사용 목적</td>
-        <td class="data-val">${tool.purpose}</td>
+        <td class="data-val">${safePurpose}</td>
       </tr>
       <tr class="data-row">
         <td class="data-label">사용 방법</td>
-        <td class="data-val">${tool.method}</td>
+        <td class="data-val">${safeMethod}</td>
       </tr>
     </table>
     <div class="tags">
       ${tagsHTML}
     </div>
     <div class="action-area" style="display: flex; gap: 10px;">
-      <a href="${tool.url}" 
+      <a href="${safeToolUrl}" 
          target="_blank" 
          rel="noopener noreferrer"
          class="btn-link" 
          style="flex: 1;"
-         data-url="${tool.url}"
-         aria-label="${tool.buttonText} - ${tool.name}">
-        ${tool.buttonText}
+         data-url="${safeToolUrl}"
+         aria-label="${safeButtonText} - ${safeName}">
+        ${safeButtonText}
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
         </svg>
       </a>
       <button class="share-btn" 
-              data-url="${tool.url}" 
+              data-url="${safeToolUrl}" 
               aria-label="링크 복사"
               type="button">
         <svg style="width:20px;height:20px" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
